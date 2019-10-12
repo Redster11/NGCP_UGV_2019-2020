@@ -10,11 +10,6 @@ width = float(width)
 myCircle = Circle.Circle(radius)
 myRectangle = Rectangle.Rectangle(length, width)
 
-myCircle.getArea()
-myCircle.getCircumference()
-myRectangle.getArea()
-myRectangle.getPerimeter()
-
 print("Circumference of circle with radius %.3f is %.3f" %(radius,myCircle.circumference))
 print("Area of circle with radius %.3f is %.3f" %(radius,myCircle.area))
 
