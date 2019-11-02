@@ -2,29 +2,29 @@ import b0RemoteApi
 import time
 from msvcrt import getch
 
-left_front_handle
-left_back_handle
-right_back_handle
-right_front_handle
+left_front_handle = None
+left_back_handle = None
+right_back_handle = None
+right_front_handle = None
 
-sj_l_1_handle
-sj_l_2_handle
-sj_l_3_handle
-sj_l_4_handle
-sj_l_5_handle
-sj_l_6_handle
+sj_l_1_handle = None
+sj_l_2_handle = None
+sj_l_3_handle = None
+sj_l_4_handle = None
+sj_l_5_handle = None
+sj_l_6_handle = None
 
-sj_r_1_handle
-sj_r_2_handle
-sj_r_3_handle
-sj_r_4_handle
-sj_r_5_handle
-sj_r_6_handle
+sj_r_1_handle = None
+sj_r_2_handle = None
+sj_r_3_handle = None
+sj_r_4_handle = None
+sj_r_5_handle = None
+sj_r_6_handle = None
 
-MaxVel
-leftvelocity
-rightvelocity
-dVel
+MaxVel = None
+leftvelocity = None
+rightvelocity = None
+dVel = None
 
 with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as client:    
     doNextStep=True
@@ -163,18 +163,18 @@ def sysCall_actuation():
             leftvelocity=leftvelocity+dVel
             rightvelocity=rightvelocity-dVel    
     
-    if (leftvelocity>MaxVel):
-        leftvelocity=MaxVel
+    if (leftvelocity > MaxVel):
+        leftvelocity = MaxVel
     
-    if (leftvelocity<-MaxVel):
-        leftvelocity=-MaxVel
+    if (leftvelocity < -1*MaxVel):
+        leftvelocity = -1*MaxVel
     
     
-    if (rightvelocity>MaxVel):
-        rightvelocity=MaxVel
+    if (rightvelocity > MaxVel):
+        rightvelocity = MaxVel
     
-    if (rightvelocity<-MaxVel):
-        rightvelocity=-MaxVel
+    if (rightvelocity < -1*MaxVel):
+        rightvelocity = -1*MaxVel
     
     
     #client.simxSetJointTargetVelocity(left_front_handle,leftvelocity, client.simxServiceCall())
