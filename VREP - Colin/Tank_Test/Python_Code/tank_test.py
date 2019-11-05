@@ -40,6 +40,7 @@ def simulationStepDone(msg):
     doNextStep=True
 
 def sysCall_init():
+    client.simxStartSimulation(client.simxDefaultPublisher())
     client.simxAddStatusbarMessage('Hello world!',client.simxDefaultPublisher())
     global left_front_handle
     global left_back_handle
@@ -81,7 +82,7 @@ def sysCall_init():
     global rightvelocity
     global dVel
     MaxVel = 10
-    leftvelocity = 0
+    leftvelocity = 100
     rightvelocity = 0
     dVel = 0.5
 
@@ -181,12 +182,17 @@ def sysCall_actuation():
     client.simxSetJointTargetVelocity(left_back_handle,leftvelocity, client.simxServiceCall())
     client.simxSetJointTargetVelocity(right_back_handle,rightvelocity, client.simxServiceCall())
     #client.simxSetJointTargetVelocity(right_front_handle,rightvelocity, client.simxServiceCall())
-    
+
 
 startTime=time.time()
-while time.time()<startTime+5: 
+while time.time()<startTime+60: 
     if doNextStep:
         doNextStep=False
         client.simxSynchronousTrigger()
     client.simxSpinOnce()
 client.simxStopSimulation(client.simxDefaultPublisher())
+
+if __name__ == "__main__":
+    sysCall_init()
+    while doNextStep:
+        sysCall_actuation()
