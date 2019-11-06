@@ -68,10 +68,10 @@ def update_img():
     # I'm only using it here so that I can show the two images side-by-side in a plot.
 
     img_tmp = np.zeros((256, 512, 3), dtype=np.uint8)
-    # img_tmp[:, :256, :] = np.rot90(sim_img, 2, (0, 1))  # rotate image 180 degr
-    # img_tmp[:, 256:, :] = np.rot90(sim_depth, 2, (0, 1))
-    img_tmp[:, :256, :] = sim_img  # I don't understand ... sometimes the image is 180 turned, sometimes it isn't
-    img_tmp[:, 256:, :] = sim_depth
+    img_tmp[:, :256, :] = np.rot90(sim_img, 2, (0, 1))  # rotate image 180 degr
+    img_tmp[:, 256:, :] = np.rot90(sim_depth, 2, (0, 1))
+    #img_tmp[:, :256, :] = sim_img  # I don't understand ... sometimes the image is 180 turned, sometimes it isn't
+    #img_tmp[:, 256:, :] = sim_depth
     return img_tmp
 
 
