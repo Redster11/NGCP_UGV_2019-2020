@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "C:\\Program Files\\Webots\\lib\\python37"
+			"path": "C:\\Program Files\\Webots\\lib\\controller\\python37"
 		}
 	],
 	"settings": {}

@@ -26,5 +26,5 @@ WoodenBox {
   mass 10
 }
 E-puck {
-  controller "e-puck_go_forward"
+  controller "<extern>"
 }
