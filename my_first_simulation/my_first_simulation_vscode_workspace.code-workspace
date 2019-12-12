@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "C:\\Program Files\\Webots\\lib\\controller\\python37"
 		}
 	],
 	"settings": {}
