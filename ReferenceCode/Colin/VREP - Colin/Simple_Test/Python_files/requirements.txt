@@ -1,1 +1,0 @@
-msgpack_python==0.5.6
