@@ -1,15 +1,15 @@
-"""my controller description."""
+"""basic movement controller for SUGV"""
 from controller import Robot, Motor
 
 MAX_SPEED = 10
-#TIME_STEP = 64
+# TIME_STEP = 64
 
 # create Robot
 robot = Robot()
 
 # instantiate devices on Robot
-wheelsL = [Motor("left front motor"), Motor("left back motor")]
-wheelsR = [Motor("right front motor"), Motor("right back motor")]
+wheelsL = [Motor("motor LRear"), Motor("motor LFront")]
+wheelsR = [Motor("motor RRear"), Motor("motor RFront")]
 
 # get timestep
 TIME_STEP = int(robot.getBasicTimeStep())
@@ -30,12 +30,11 @@ wheelsL[1].setVelocity(leftSpeedPercent * MAX_SPEED)
 wheelsR[0].setVelocity(rightSpeedPercent * MAX_SPEED)
 wheelsR[1].setVelocity(rightSpeedPercent * MAX_SPEED)
 
+
+# test
+testwheel = Motor('rotational motor')
+testwheel.setPosition(float('inf'))
+testwheel.setVelocity(10)
+
 while (robot.step(TIME_STEP) != -1):
-  # Read the sensors, like:
-
-  # Process sensor data here
-
-  # Enter here functions to send actuator commands, like:
   pass
-
-# Enter here exit cleanup code
