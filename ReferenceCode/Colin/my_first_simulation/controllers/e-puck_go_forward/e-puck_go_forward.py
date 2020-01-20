@@ -25,5 +25,5 @@ leftSpeedPercent = 0.30
 leftMotor.setVelocity(leftSpeedPercent * MAX_SPEED)
 rightMotor.setVelocity(rightSpeedPercent * MAX_SPEED)
 
-while robot.step(TIME_STEP) != -1:
+while (robot.step(TIME_STEP) != -1):
    pass
