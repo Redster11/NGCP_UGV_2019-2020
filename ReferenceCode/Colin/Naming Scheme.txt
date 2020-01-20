@@ -1,0 +1,11 @@
+GitHub Naming Scheme:
+Summary: Big picture changes
+Descriptions: files changed, lines changed, reasoning
+
+Coding Naming Scheme:
+TOF: Purpose of file, what uses it and what it uses
+Relevant variable names
+Comment expected type of variables
+Comments for blocks of code
+	Group function definitions, variables, etc
+Function purpose, input, output
