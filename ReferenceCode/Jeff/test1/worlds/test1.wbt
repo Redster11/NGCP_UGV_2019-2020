@@ -1,0 +1,71 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  gpsCoordinateSystem "WGS84"
+}
+Viewpoint {
+  orientation 0.978377851267436 0.18145804745240218 0.0992459428091486 5.5977627279376225
+  position -0.09605143114103083 0.7843361799140746 1.187465032879544
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 5 5
+}
+WoodenBox {
+  translation -0.00496403 0.05 -0.0693853
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation -0.069793 0.05 -0.758972
+  name "wooden box(3)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation 0.305891 0.05 -0.550384
+  name "wooden box(4)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation 0.358434 0.05 -1.65788
+  name "wooden box(5)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation 0.289585 0.05 0.429747
+  name "wooden box(6)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation 0.0332307 0.05 1.01231
+  name "wooden box(7)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+WoodenBox {
+  translation -0.509563 0.05 -0.558767
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+  mass 1
+}
+E-puck {
+  translation -0.00482575 -4.44089e-16 0.226306
+  controller "e-puck_collision_avoidance"
+  turretSlot [
+    Compass {
+      yAxis FALSE
+    }
+    GPS {
+    }
+    Camera {
+    }
+  ]
+}
