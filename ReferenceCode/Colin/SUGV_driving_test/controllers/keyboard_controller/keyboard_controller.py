@@ -44,7 +44,7 @@ while (robot.step(TIME_STEP) != -1):
     if(rightSpeed >= MAX_SPEED):
       rightSpeed = MAX_SPEED
 
-    print("w:%f:%f" %(leftSpeed, rightSpeed))
+    # print("w:%f:%f" %(leftSpeed, rightSpeed))
 
   # reverse
   if(key == ord('S')):
@@ -56,7 +56,7 @@ while (robot.step(TIME_STEP) != -1):
     if(rightSpeed <= -1*MAX_SPEED):
       rightSpeed = -1*MAX_SPEED
 
-    print("s:%f:%f" %(leftSpeed, rightSpeed))
+    # print("s:%f:%f" %(leftSpeed, rightSpeed))
 
   # turn left
   if(key == ord('A')):
@@ -68,7 +68,7 @@ while (robot.step(TIME_STEP) != -1):
     if(rightSpeed >= MAX_SPEED):
       rightSpeed = MAX_SPEED
 
-    print("a:%f:%f" %(leftSpeed, rightSpeed))
+    # print("a:%f:%f" %(leftSpeed, rightSpeed))
 
   # turn right
   if(key == ord('D')):
@@ -80,7 +80,7 @@ while (robot.step(TIME_STEP) != -1):
     if(rightSpeed <= -1*MAX_SPEED):
       rightSpeed = -1*MAX_SPEED
 
-    print("d:%f:%f" %(leftSpeed, rightSpeed))
+    # print("d:%f:%f" %(leftSpeed, rightSpeed))
 
   # no input
   if(key == -1):
@@ -100,7 +100,7 @@ while (robot.step(TIME_STEP) != -1):
     else:
       rightSpeed = 0
 
-    print(" :%f:%f" %(leftSpeed, rightSpeed))
+    # print(" :%f:%f" %(leftSpeed, rightSpeed))
 
 # set speed
   wheelsL[0].setVelocity(leftSpeed)
