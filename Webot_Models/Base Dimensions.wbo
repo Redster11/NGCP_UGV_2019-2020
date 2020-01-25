@@ -2,6 +2,10 @@
 DEF SUGV Robot {
   translation 0 0.16 0
   children [
+    Compass {
+    }
+    GPS {
+    }
     DEF Wheel_RF HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.13 -0.0499998 -0.11
