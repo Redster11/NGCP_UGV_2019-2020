@@ -6,7 +6,7 @@ import math
 MAX_SPEED = -10
 # TIME_STEP = 64
 INCREMENT = 0.1
-TURN_COEFFICIENT = 4.0
+TURN_COEFFICIENT = 2.0
 DISTANCE_TOLERANCE = 1.5
 TARGET_POINTS_SIZE = 13
 M_PI = math.pi
@@ -15,7 +15,7 @@ RIGHT = 1
 
 # Globals
 current_target_index = 0
-targets = [[-4.209318, -9.147717], [0.946812, -9.404304]]
+targets = [[-4.209318, -9.147717], [0.946812, -9.404304], [0.175989, 1.784311], [-2.805353, 8.829694], [-3.846730, 15.602851], [-4.394915, 24.550777], [-1.701877, 33.617226], [-4.394915, 24.550777], [-3.846730, 15.602851], [-2.805353, 8.829694], [0.175989, 1.784311], [0.946812, -9.404304], [-7.930821, -6.421292]]
 autopilot = True
 old_autopilot = True
 old_key = -1
@@ -28,7 +28,7 @@ kb = robot.getKeyboard()
 kb.enable(250)
 
 # instantiate devices on Robot
-motors = [Motor("motor LRear"), Motor("motor LFront"), Motor("motor RRear"), Motor("motor RFront")]
+motors = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
 gps = GPS('gps')
 gps.enable(250)
 compass = Compass('compass')
@@ -135,7 +135,7 @@ def run_autopilot():
     # read gps position and compass values
     pos3D = gps.getValues()
     north3D = compass.getValues()
-    print(pos3D)
+    # print(pos3D)
 
     # compute the 2D position of the robo and its orientation
     pos = [pos3D[0], pos3D[2]]

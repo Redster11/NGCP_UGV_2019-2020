@@ -35,71 +35,28 @@ while (robot.step(TIME_STEP) != -1):
   # DRIVING LOGIC
   # forward
   if(key == ord('W')):
-    leftSpeed += INCREMENT
-    rightSpeed += INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    print("w:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = MAX_SPEED
+    rightSpeed = MAX_SPEED
 
   # reverse
   if(key == ord('S')):
-    leftSpeed -= INCREMENT
-    rightSpeed -= INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    print("s:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = -1*MAX_SPEED
+    rightSpeed = -1*MAX_SPEED
 
   # turn left
   if(key == ord('A')):
-    leftSpeed -= 2*INCREMENT
-    rightSpeed += INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    print("a:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = -1*MAX_SPEED
+    rightSpeed = MAX_SPEED
 
   # turn right
   if(key == ord('D')):
-    leftSpeed += INCREMENT
-    rightSpeed -= 2*INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    print("d:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = MAX_SPEED
+    rightSpeed = -1*MAX_SPEED
 
   # no input
   if(key == -1):
-    if(leftSpeed != 0):
-      if(leftSpeed < 0):
-        leftSpeed += 3*INCREMENT
-      if(rightSpeed > 0):
-        leftSpeed -= 3*INCREMENT
-    else:
-      leftSpeed = 0
-
-    if(rightSpeed != 0):
-      if(rightSpeed < 0):
-        rightSpeed += 3*INCREMENT
-      if(rightSpeed > 0):
-        rightSpeed -= 3*INCREMENT
-    else:
-      rightSpeed = 0
-
-    print(" :%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = 0
+    rightSpeed = 0
 
 # set speed
   wheels[0].setVelocity(leftSpeed)

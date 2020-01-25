@@ -2,8 +2,6 @@
 from controller import Robot, Motor, Keyboard
 
 MAX_SPEED = -10
-# TIME_STEP = 64
-INCREMENT = 0.1
 
 # create Robot
 robot = Robot()
@@ -19,9 +17,10 @@ wheels = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_
 TIME_STEP = int(robot.getBasicTimeStep())
 
 # set target position to infinity (speed control)
-for i in range(0,4):
-  wheels[i].setPosition(float('inf'))
-  wheels[i].setVelocity(0.0)
+wheels[0].setPosition(float('inf'))
+wheels[1].setPosition(float('inf'))
+wheels[2].setPosition(float('inf'))
+wheels[3].setPosition(float('inf'))
 
 while (robot.step(TIME_STEP) != -1):
   # poll keyboard key
@@ -55,8 +54,9 @@ while (robot.step(TIME_STEP) != -1):
     rightSpeed = 0
 
   # set speed
-  for i in range(0,2):
-    wheels[i].setVelocity(leftSpeed)
-    wheels[i+2].setVelocity(rightSpeed)
-    
+  wheels[0].setVelocity(leftSpeed)
+  wheels[1].setVelocity(leftSpeed)
+  wheels[2].setVelocity(rightSpeed)
+  wheels[3].setVelocity(rightSpeed)
+
   pass

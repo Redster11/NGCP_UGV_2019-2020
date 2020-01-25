@@ -1,19 +1,4 @@
-#VRML_SIM R2020a utf8
-WorldInfo {
-}
-Viewpoint {
-  orientation 0.7090112542001726 -0.6966344497849006 -0.10956041616563288 5.911834789463689
-  position 0.6738443665166682 0.6933966845376869 2.0599993453536576
-  follow "SUGV:body"
-  followType "Mounted Shot"
-}
-TexturedBackground {
-}
-TexturedBackgroundLight {
-}
-RectangleArena {
-  floorSize 10 10
-}
+#VRML_OBJ R2020a utf8
 DEF SUGV Robot {
   translation 0 0.16 0
   children [
