@@ -14,26 +14,24 @@ kb.enable(250)
 
 # instantiate devices on Robot
 wheels = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
-
 # get timestep
 TIME_STEP = int(robot.getBasicTimeStep())
 
 # set target position to infinity (speed control)
 for i in range(0,4):
   wheels[i].setPosition(float('inf'))
-  wheels[i].setVelocity(0.0)
 
 while (robot.step(TIME_STEP) != -1):
-  # poll keyboard key
+  # poll keyboard ey
   key = kb.getKey()
   # print(key)
-
+    
   # DRIVING LOGIC
   # forward
   if(key == ord('W')):
     leftSpeed = MAX_SPEED
     rightSpeed = MAX_SPEED
-
+    
   # reverse
   if(key == ord('S')):
     leftSpeed = -1*MAX_SPEED
@@ -55,9 +53,9 @@ while (robot.step(TIME_STEP) != -1):
     rightSpeed = 0
 
   # set speed
-    wheels[0].setVelocity(leftSpeed)
-    wheels[1].setVelocity(leftSpeed)
-    wheels[2].setVelocity(rightSpeed)
-    wheels[3].setVelocity(rightSpeed)
+  wheels[0].setVelocity(leftSpeed)
+  wheels[1].setVelocity(leftSpeed)
+  wheels[2].setVelocity(rightSpeed)
+  wheels[3].setVelocity(rightSpeed)
     
   pass
