@@ -13,21 +13,16 @@ kb = robot.getKeyboard()
 kb.enable(250)
 
 # instantiate devices on Robot
-wheelsL = [Motor("motor LRear"), Motor("motor LFront")]
-wheelsR = [Motor("motor RRear"), Motor("motor RFront")]
+wheels = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
 
 # get timestep
 TIME_STEP = int(robot.getBasicTimeStep())
 
 # set target position to infinity (speed control)
-wheelsL[0].setPosition(float('inf'))
-wheelsL[1].setPosition(float('inf'))
-wheelsR[0].setPosition(float('inf'))
-wheelsR[1].setPosition(float('inf'))
+for i in range(0,4):
+  wheels[i].setPosition(float('inf'))
+  wheels[i].setVelocity(0.0)
 
-key = None
-leftSpeed = 0
-rightSpeed = 0
 while (robot.step(TIME_STEP) != -1):
   # poll keyboard key
   key = kb.getKey()
@@ -36,76 +31,33 @@ while (robot.step(TIME_STEP) != -1):
   # DRIVING LOGIC
   # forward
   if(key == ord('W')):
-    leftSpeed += INCREMENT
-    rightSpeed += INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    # print("w:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = MAX_SPEED
+    rightSpeed = MAX_SPEED
 
   # reverse
   if(key == ord('S')):
-    leftSpeed -= INCREMENT
-    rightSpeed -= INCREMENT
-
-    if(leftSpeed <= -1*MAX_SPEED):
-      leftSpeed = -1*MAX_SPEED
-    if(rightSpeed <= -1*MAX_SPEED):
-      rightSpeed = -1*MAX_SPEED
-
-    # print("s:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = -1*MAX_SPEED
+    rightSpeed = -1*MAX_SPEED
 
   # turn left
   if(key == ord('A')):
-    leftSpeed -= 2*INCREMENT
-    rightSpeed += INCREMENT
-
-    if(leftSpeed <= -1*MAX_SPEED):
-      leftSpeed = -1*MAX_SPEED
-    if(rightSpeed >= MAX_SPEED):
-      rightSpeed = MAX_SPEED
-
-    # print("a:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = -1*MAX_SPEED
+    rightSpeed = MAX_SPEED
 
   # turn right
   if(key == ord('D')):
-    leftSpeed += INCREMENT
-    rightSpeed -= 2*INCREMENT
-
-    if(leftSpeed >= MAX_SPEED):
-      leftSpeed = MAX_SPEED
-    if(rightSpeed <= -1*MAX_SPEED):
-      rightSpeed = -1*MAX_SPEED
-
-    # print("d:%f:%f" %(leftSpeed, rightSpeed))
+    leftSpeed = MAX_SPEED
+    rightSpeed = -1*MAX_SPEED
 
   # no input
   if(key == -1):
-    if(leftSpeed != 0):
-      if(leftSpeed < 0):
-        leftSpeed += 3*INCREMENT
-      if(rightSpeed > 0):
-        leftSpeed -= 3*INCREMENT
-    else:
-      leftSpeed = 0
+    leftSpeed = 0
+    rightSpeed = 0
 
-    if(rightSpeed != 0):
-      if(rightSpeed < 0):
-        rightSpeed += 3*INCREMENT
-      if(rightSpeed > 0):
-        rightSpeed -= 3*INCREMENT
-    else:
-      rightSpeed = 0
-
-    # print(" :%f:%f" %(leftSpeed, rightSpeed))
-
-# set speed
-  wheelsL[0].setVelocity(leftSpeed)
-  wheelsL[1].setVelocity(leftSpeed)
-  wheelsR[0].setVelocity(rightSpeed)
-  wheelsR[1].setVelocity(rightSpeed)
-
+  # set speed
+    wheels[0].setVelocity(leftSpeed)
+    wheels[1].setVelocity(leftSpeed)
+    wheels[2].setVelocity(rightSpeed)
+    wheels[3].setVelocity(rightSpeed)
+    
   pass
