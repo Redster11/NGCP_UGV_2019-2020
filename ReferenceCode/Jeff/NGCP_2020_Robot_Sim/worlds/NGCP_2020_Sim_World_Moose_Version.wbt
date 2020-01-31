@@ -1,0 +1,20 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  gpsCoordinateSystem "WGS84"
+}
+Viewpoint {
+  orientation 0.9999257195562709 0.0008290433414733955 -0.012160101028047699 5.768801420796593
+  position 0.29034707055683384 5.370445576963217 10.128166615612022
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 50 50
+  floorTileSize 1 1
+}
+Moose {
+  translation 0 0.48 0
+}
