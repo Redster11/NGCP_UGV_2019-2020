@@ -58,7 +58,7 @@ while (robot.step(TIME_STEP) != -1):
 
   # turn left
   if(key == ord('A')):
-    leftSpeed -= 2*INCREMENT
+    leftSpeed -= INCREMENT
     rightSpeed += INCREMENT
 
     if(leftSpeed <= -1*MAX_SPEED):
@@ -71,7 +71,7 @@ while (robot.step(TIME_STEP) != -1):
   # turn right
   if(key == ord('D')):
     leftSpeed += INCREMENT
-    rightSpeed -= 2*INCREMENT
+    rightSpeed -= INCREMENT
 
     if(leftSpeed >= MAX_SPEED):
       leftSpeed = MAX_SPEED
