@@ -1,9 +1,10 @@
 #VRML_SIM R2020a utf8
 WorldInfo {
+  gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.7090112542001726 -0.6966344497849006 -0.10956041616563288 5.911834789463689
-  position 0.6738443665166682 0.6933966845376869 2.0599993453536576
+  orientation -0.040552876939862856 -0.9868770125550039 -0.15629851650739005 2.6790390565472046
+  position -0.9257346937394768 0.7928588177487428 -1.563929946504009
   follow "SUGV:body"
   followType "Mounted Shot"
 }
@@ -12,22 +13,23 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 10 10
+  floorSize 15 15
 }
 DEF SUGV Robot {
   translation 0 0.16 0
   children [
     Compass {
+      yAxis FALSE
     }
     GPS {
     }
-    DEF Wheel_RF HingeJoint {
+    DEF Wheel_LB HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.13 -0.0499998 -0.11
       }
       device [
         RotationalMotor {
-          name "Motor_RF"
+          name "Motor_LB"
         }
       ]
       endPoint Solid {
@@ -37,7 +39,7 @@ DEF SUGV Robot {
           Shape {
             appearance Appearance {
               material Material {
-                diffuseColor 0 1 0
+                diffuseColor 0 1 1
               }
             }
             geometry Cylinder {
@@ -46,7 +48,7 @@ DEF SUGV Robot {
             }
           }
         ]
-        name "Wheel_RF"
+        name "Wheel_LB"
         boundingObject Cylinder {
           height 0.0254
           radius 0.0381
@@ -84,13 +86,13 @@ DEF SUGV Robot {
         }
       }
     }
-    DEF Wheel_RB HingeJoint {
+    DEF Wheel_LF HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.13 -0.0500003 0.11
       }
       device [
         RotationalMotor {
-          name "Motor_RB"
+          name "Motor_LF"
         }
       ]
       endPoint Solid {
@@ -109,7 +111,7 @@ DEF SUGV Robot {
             }
           }
         ]
-        name "Wheel_RB"
+        name "Wheel_LF"
         boundingObject Cylinder {
           height 0.0254
           radius 0.0381
@@ -118,13 +120,13 @@ DEF SUGV Robot {
         }
       }
     }
-    DEF Wheel_LF HingeJoint {
+    DEF Wheel_RB HingeJoint {
       jointParameters HingeJointParameters {
         anchor -0.13 -0.0500008 -0.11
       }
       device [
         RotationalMotor {
-          name "Motor_LF"
+          name "Motor_RB"
         }
       ]
       endPoint Solid {
@@ -134,7 +136,7 @@ DEF SUGV Robot {
           Shape {
             appearance Appearance {
               material Material {
-                diffuseColor 0 1 0
+                diffuseColor 0 1 1
               }
             }
             geometry Cylinder {
@@ -143,7 +145,7 @@ DEF SUGV Robot {
             }
           }
         ]
-        name "Wheel_LF"
+        name "Wheel_RB"
         boundingObject Cylinder {
           height 0.0254
           radius 0.0381
@@ -181,13 +183,13 @@ DEF SUGV Robot {
         }
       }
     }
-    DEF Wheel_LB HingeJoint {
+    DEF Wheel_RF HingeJoint {
       jointParameters HingeJointParameters {
         anchor -0.13 -0.0500008 0.11
       }
       device [
         RotationalMotor {
-          name "Motor_LB"
+          name "Motor_RF"
         }
       ]
       endPoint Solid {
@@ -206,7 +208,7 @@ DEF SUGV Robot {
             }
           }
         ]
-        name "Wheel_LB"
+        name "Wheel_RF"
         boundingObject Cylinder {
           height 0.0254
           radius 0.0381
