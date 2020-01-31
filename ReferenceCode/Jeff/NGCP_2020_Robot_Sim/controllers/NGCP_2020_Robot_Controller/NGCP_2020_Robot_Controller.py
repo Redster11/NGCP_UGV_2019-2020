@@ -141,8 +141,6 @@ while robot.step(timestep) != -1:
     headingVector = compass.getValues()
     headingDegrees = math.degrees(math.atan2(headingVector[2],headingVector[0]))
     
-    #if(headingDegrees < 0):
-        #headingDegrees = headingDegrees+360
     headingDegrees = abs((headingDegrees-360)%360)
     
     targetHeading = calculate_initial_compass_bearing(gpsLocation, gpsDestination)
