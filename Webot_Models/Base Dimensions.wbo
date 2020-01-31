@@ -3,6 +3,7 @@ DEF SUGV Robot {
   translation 0 0.16 0
   children [
     Compass {
+      yAxis FALSE
     }
     GPS {
     }
@@ -233,5 +234,5 @@ DEF SUGV Robot {
   }
   physics Physics {
   }
-  controller "basic_keyboard_controller"
+  controller "<extern>"
 }
