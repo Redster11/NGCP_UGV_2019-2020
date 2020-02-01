@@ -1,9 +1,16 @@
+#This is the functioning waypoint navigation simulation with keybaord controls.
+#You can manually drive the robot with the W,A,S, and D keys.
+#Press Q to engage automated waypoint navigation.
+#Waypoint navigation can be cancelled at any time by pressing W, A, S, or D.
+#The waypoint can be changed by updating the GPSDestination cordinates in the main loop at the bottom. 
+
 from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Compass
 import math
 
 #global variables
 global lbMotor, lfMotor, rbMotor, rfMotor, robot, autoPilot, previousKey, headingAdjusted
 
+#Robot and variable declarations
 robot = Robot()
 autoPilot = False
 
@@ -17,7 +24,7 @@ headingAdjusted = False
 previousKey = 61
 
 #function definitions
-def initilize_motors():
+def initilize_motors(): 
     
     global lbMotor, lfMotor, rbMotor, rfMotor, robot
     lbMotor = robot.getMotor('Motor_LB')
@@ -89,7 +96,7 @@ def read_keyboard_input(key, maxSpeed):
         autoPilot = False
         headingAdjusted = False
     if key == 81:
-        if(key != previousKey):
+        if(key != previousKey): #key can only be pressed once
             autoPilot = not autoPilot
      
     previousKey = key
@@ -132,8 +139,9 @@ def calculate_initial_compass_bearing(pointA, pointB):
     compass_bearing = (initial_bearing + 360) % 360
 
     return compass_bearing  
-    
-def haversine(coord1, coord2):
+
+#calculates distance between two GPS cordinates account for curivature of the earth
+def haversine(coord1, coord2): 
     R = 6372800  # Earth radius in meters
     lat1, lon1 = coord1
     lat2, lon2 = coord2
@@ -147,7 +155,7 @@ def haversine(coord1, coord2):
     
     return 2*R*math.atan2(math.sqrt(a), math.sqrt(1 - a))
    
-def auto_pilot(maxSpeed):
+def auto_pilot(maxSpeed, gpsDestination):
 
     global headingAdjusted
     
@@ -155,18 +163,23 @@ def auto_pilot(maxSpeed):
     gpsLocation = ()
    
 
-    tempLocation = gps.getValues() 
-    gpsLocation = (tempLocation[0], -tempLocation[1])
-    gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
+    tempLocation = gps.getValues() #gets 3D GPS location in standard cordinate system
+    gpsLocation = (tempLocation[0], -tempLocation[1]) #Converts to 2D and flips cordinate system
+                                                      #to match compass
     
-    headingVector = compass.getValues()
+    headingVector = compass.getValues() #gets compass heading in vectors
+    
+    #converts from vectors to degrees. North is zero, rotates through 360 going counterclockwise
     headingDegrees = math.degrees(math.atan2(headingVector[2],headingVector[0]))
     headingDegrees = abs((headingDegrees-360)%360)
     
     targetHeading = calculate_initial_compass_bearing(gpsLocation, gpsDestination)
     targetDistance = haversine(gpsLocation, gpsDestination)
+    
+    #gets the difference between robot heading and destination heading, converts to 360 degrees
     angleDifference = abs(((headingDegrees - targetHeading)-360)%360)
     
+    #turns robot towards gps cordinate and drive forwards
     if(angleDifference <= 180 and headingAdjusted == False):
         turn_right(maxSpeed/5)
     if(angleDifference > 180 and headingAdjusted == False):
@@ -179,11 +192,11 @@ def auto_pilot(maxSpeed):
         
     if targetDistance<0.2:
         auto_pilot = False
-    #print(targetDistance, angleDifference)
+   
 
 #MAIN
 timestep = 64
-maxSpeed = -10
+maxSpeed = -10 #speed is negative because robot is backwards
     
 input = robot.getKeyboard()
 input.enable(100)    
@@ -195,12 +208,22 @@ while robot.step(timestep) != -1:
  
     key = input.getKey()
     stop_moving()
+    
+    tempLocation = gps.getValues() #gets 3D GPS location in standard cordinate system
+    currentLocation = (tempLocation[0], -tempLocation[1]) #Converts to 2D
+    
+    headingVector = compass.getValues() #gets compass heading in vectors
+    currentHeading = math.degrees(math.atan2(headingVector[2],headingVector[0]))
+    currentHeading = abs((currentHeading-360)%360)
+    
+    gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
+    
     if(key > -1):
         read_keyboard_input(key,maxSpeed)
     if(autoPilot == True):
-        auto_pilot(maxSpeed)
+        auto_pilot(maxSpeed, gpsDestination)
         
-    print(headingAdjusted)
-        
-#Functions    
+    #uncomment the following line to see location and heading information    
+    #print(currentLocation, currentHeading)
+       
 
