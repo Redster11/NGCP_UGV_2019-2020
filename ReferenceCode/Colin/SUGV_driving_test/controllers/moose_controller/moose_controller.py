@@ -159,7 +159,7 @@ def run_autopilot():
 
     # a target position has been reached
     if (distance < DISTANCE_TOLERANCE):
-        print("target {0} reached" .format(current_target_index + 1))
+        print("\ntarget {0} reached" .format(current_target_index + 1))
         current_target_index += 1
         current_target_index %= TARGET_POINTS_SIZE
     
