@@ -3,10 +3,9 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.4410290203929964 0.8105749070719833 0.3853073100739714 4.621824917618156
-  position -1.1496863762501577 1.9098792039726737 0.4608389248336419
+  orientation 0.27814522065761044 0.922036837558204 0.26922723935552223 4.641441915774213
+  position -2.957534904305279 1.9337559505331985 0.12082037791869649
   follow "SUGV:body"
-  followType "Mounted Shot"
 }
 TexturedBackground {
 }
@@ -14,6 +13,9 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   floorSize 10 10
+}
+WoodenBox {
+  translation 2.37609 0.3 2.36027
 }
 DEF SUGV Robot {
   translation 0 0.16 0
@@ -36,7 +38,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation 0.13 -0.0499998 -0.11
-        rotation 7.850447875279518e-17 -7.850447875279518e-17 1 1.5707999999999998
+        rotation 0 -1.1775671812919276e-16 1 1.5707999999999998
         children [
           Shape {
             appearance Appearance {
@@ -65,7 +67,7 @@ DEF SUGV Robot {
       }
       endPoint Solid {
         translation 0.13 -0.05 0
-        rotation 1.533290600640531e-19 -1.533290600640531e-19 1 1.5707999999999995
+        rotation 2.9439179532298196e-17 0 1 1.5707999999999989
         children [
           Shape {
             appearance Appearance {
@@ -99,7 +101,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation 0.13 -0.0500003 0.11
-        rotation 0 0 1 1.570799999999999
+        rotation -7.850447875279521e-17 -7.850447875279521e-17 1 1.570799999999999
         children [
           Shape {
             appearance Appearance {
@@ -133,7 +135,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation -0.13 -0.0500008 -0.11
-        rotation -1.96261196881988e-16 -3.925223937639759e-17 1 1.5707999999999995
+        rotation -1.570089575055904e-16 -7.85044787527952e-17 1 1.570799999999999
         children [
           Shape {
             appearance Appearance {
@@ -162,7 +164,7 @@ DEF SUGV Robot {
       }
       endPoint Solid {
         translation -0.13 -0.0500008 0
-        rotation -3.0665812012810623e-19 -7.666453003202656e-20 1 1.570799999999999
+        rotation -1.9626119688198802e-17 0 1 1.570799999999999
         children [
           Shape {
             appearance Appearance {
@@ -196,7 +198,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation -0.13 -0.0500008 0.11
-        rotation -3.9252239376397585e-17 0 1 1.5707999999999995
+        rotation -1.9626119688198792e-16 0 1 1.5707999999999995
         children [
           Shape {
             appearance Appearance {
