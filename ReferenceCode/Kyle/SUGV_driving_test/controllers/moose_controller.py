@@ -3,19 +3,19 @@ from controller import Robot, Motor, Keyboard, GPS, Compass
 import math
 
 # Constants
-MAX_SPEED = -10
+MAX_SPEED = 10
 # TIME_STEP = 64
 INCREMENT = 0.1
-TURN_COEFFICIENT = 4.0
-DISTANCE_TOLERANCE = 1.5
-TARGET_POINTS_SIZE = 13
+TURN_COEFFICIENT = 2.0
+DISTANCE_TOLERANCE = 0.000001
+TARGET_POINTS_SIZE = 4
 M_PI = math.pi
 LEFT = 0
 RIGHT = 1
 
 # Globals
 current_target_index = 0
-targets = [[-4.209318, -9.147717], [0.946812, -9.404304]]
+targets = [[0.00001, 0.00004], [0.00000, 0.00000], [-0.00000, -0.00004], [-0.0000, -0.00001]]
 autopilot = True
 old_autopilot = True
 old_key = -1
@@ -28,7 +28,7 @@ kb = robot.getKeyboard()
 kb.enable(250)
 
 # instantiate devices on Robot
-motors = [Motor("motor LRear"), Motor("motor LFront"), Motor("motor RRear"), Motor("motor RFront")]
+motors = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
 gps = GPS('gps')
 gps.enable(250)
 compass = Compass('compass')
@@ -45,13 +45,6 @@ print("You can drive this robot:")
 print("Select the 3D window and use cursor keys:")
 print("Press 'A' to return to the autopilot mode")
 print("Press 'P' to get the robot position")
-
-def modulus_double(a, m):
-    div_d = a / m
-    r = a - div_d * m
-    if (r < 0.0):
-        r += m
-    return r
 
 # set left and right motor speed [rad/s]
 def robot_set_speed(left, right):
@@ -88,7 +81,7 @@ def check_keyboard():
         if(key == ord('P')):
             if (key != old_key):  # perform this action just once
                 pos3D = gps.getValues()
-                print("position: {%f, %f}\n", pos3D[0], pos3D[2])
+                print("position: {0:.3f}, {1:.3f}" .format(pos3D[0], pos3D[1]))
         if(key == ord('A')):
             if (key != old_key):  # perform this action just once
                 autopilot = not autopilot
@@ -105,23 +98,34 @@ def check_keyboard():
 
 # ||v||
 def norm(v):
-    return math.sqrt(v[0] * v[0] + v[1] * v[1])
+    return math.sqrt(v[0]*v[0] + v[1]*v[1])
 
 # v = v/||v||
 def normalize(v):
     n = norm(v)
     v[0] /= n
     v[1] /= n
+    return v
 
 # v = v1-v2
-def minus(v, v1, v2):
+def minus(v1, v2):
+    v = [None,None]
     v[0] = v1[0] - v2[0]
     v[1] = v1[1] - v2[1]
+    return v
 
 # compute the angle between two vectors
 # return value: [0, 2Pi]
 def angle(v1, v2):
-    return modulus_double(math.atan2(v2[1], v2[0]) - math.atan2(v1[1], v1[0]), 2.0 * M_PI)
+    dotProduct = v1[0]*v2[0] + v1[1]*v2[1]
+    # for three dimensional simply add dotProduct = a*c + b*d  + e*f 
+
+    magnitudeProduct = math.sqrt(v1[0]*v1[0] + v1[1]*v1[1]) * math.sqrt(v2[0]*v2[0] + v2[1]*v2[1]) 
+    # for three dimensional simply add modOfVector = math.sqrt( a*a + b*b + e*e)*math.sqrt(c*c + d*d +f*f) 
+
+    angle = dotProduct/magnitudeProduct
+    theta = math.acos(angle)
+    return theta
 
 # autopilot
 # pass trough the predefined target positions
@@ -135,25 +139,27 @@ def run_autopilot():
     # read gps position and compass values
     pos3D = gps.getValues()
     north3D = compass.getValues()
-    print(pos3D)
+    # print(pos3D)
 
     # compute the 2D position of the robo and its orientation
-    pos = [pos3D[0], pos3D[2]]
+    pos = [pos3D[0], pos3D[1]]
     north = [north3D[0], north3D[2]]
-    front = [-1*north[0], north[1]]
+    front = [north[0], -1*north[1]]
 
     # compute the direction and the distance to the target
-    direction = [0,0]
-    minus(direction, targets[current_target_index], pos)
+    direction = minus(targets[current_target_index], pos)
     distance = norm(direction)
-    normalize(direction)
+    direction = normalize(direction)
+    # print("Distance: {0:.7f}    Direction: {1:.7f}, {2:.7f}".format(distance, direction[0], direction[1]), end="\r")
+    print("Current Pos: {0:.7f},{1:.7f}     Target Pos: {2:.7f},{3:.7f}" .format(pos[0], pos[1], targets[current_target_index][0],targets[current_target_index][1]), end="\r")
 
     # compute the target angle
-    beta = angle(front, direction) - M_PI
+    beta = angle(front, direction) - M_PI/2
+    # print("Front: {0:.7f}, {1:.7f}   Direction: {2:.7f}, {3:.7f}    Beta: {4:.7f}".format(front[0], front[1], direction[0], direction[1], beta), end="\r")
 
     # a target position has been reached
     if (distance < DISTANCE_TOLERANCE):
-        print("target %d reached\n", current_target_index + 1)
+        print("target {0} reached" .format(current_target_index + 1))
         current_target_index += 1
         current_target_index %= TARGET_POINTS_SIZE
     
