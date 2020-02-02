@@ -5,12 +5,6 @@ import math, random
 # Constants
 MAX_SPEED = 10
 # TIME_STEP = 64
-INCREMENT = 0.1
-TURN_COEFFICIENT = 2.0
-DISTANCE_TOLERANCE = 0.00001
-M_PI = math.pi
-LEFT = 0
-RIGHT = 1
 
 # Globals
 
