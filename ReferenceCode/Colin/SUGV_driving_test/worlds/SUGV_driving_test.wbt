@@ -3,8 +3,8 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation -0.040552876939862856 -0.9868770125550039 -0.15629851650739005 2.6790390565472046
-  position -0.9257346937394768 0.7928588177487428 -1.563929946504009
+  orientation 0.05242987834721839 0.9847485552045294 0.16589572290775847 3.708520615458634
+  position -0.9505687745902518 0.7735606466811396 -1.4321430184632267
   follow "SUGV:body"
   followType "Mounted Shot"
 }
@@ -13,11 +13,31 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 15 15
+  floorSize 20 20
 }
 DEF SUGV Robot {
   translation 0 0.16 0
   children [
+    TouchSensor {
+      translation 0 0 0.16
+      scale 0.458998 0.458998 0.458998
+      children [
+        DEF Bumper Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0
+            }
+          }
+          geometry Box {
+            size 0.1 0.1 0.05
+          }
+        }
+      ]
+      boundingObject USE Bumper
+      physics Physics {
+      }
+      translationStep 0.001
+    }
     Compass {
       yAxis FALSE
     }

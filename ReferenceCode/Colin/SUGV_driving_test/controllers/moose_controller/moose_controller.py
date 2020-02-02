@@ -1,23 +1,23 @@
 """keyboard controller with Autonomy for SUGV"""
 from controller import Robot, Motor, Keyboard, GPS, Compass
-import math
+import math, random
 
 # Constants
 MAX_SPEED = 10
 # TIME_STEP = 64
 INCREMENT = 0.1
 TURN_COEFFICIENT = 2.0
-DISTANCE_TOLERANCE = 0.000001
-TARGET_POINTS_SIZE = 4
+DISTANCE_TOLERANCE = 0.00001
 M_PI = math.pi
 LEFT = 0
 RIGHT = 1
 
 # Globals
 current_target_index = 0
-targets = [[0.00001, 0.00004], [0.00000, 0.00000], [-0.00000, -0.00004], [-0.0000, -0.00001]]
-autopilot = True
-old_autopilot = True
+# targets = [[0.00001, 0.00004], [0.00000, 0.00000], [-0.00000, -0.00004], [-0.0000, -0.00001]]
+targets = [[0,0]]
+autopilot = False
+old_autopilot = False
 old_key = -1
 
 # create Robot
@@ -41,8 +41,9 @@ TIME_STEP = int(robot.getBasicTimeStep())
 for i in range(0,4):
     motors[i].setPosition(float('inf'))
 
+ # print user instructions
 print("You can drive this robot:")
-print("Select the 3D window and use cursor keys:")
+print("Select the 3D window and use arrow keys:")
 print("Press 'A' to return to the autopilot mode")
 print("Press 'P' to get the robot position")
 
@@ -52,6 +53,7 @@ def robot_set_speed(left, right):
         motors[i + 0].setVelocity(left)
         motors[i + 2].setVelocity(right)
 
+# read keyboard input
 def check_keyboard():
     # global variable pull
     global old_key
@@ -101,13 +103,15 @@ def norm(v):
     return math.sqrt(v[0]*v[0] + v[1]*v[1])
 
 # v = v/||v||
+# return value: unit scale norm of vector [0:1][0:1]
 def normalize(v):
     n = norm(v)
     v[0] /= n
     v[1] /= n
     return v
 
-# v = v1-v2
+# subtract 'vectors'
+# return value: v[] = v1[]-v2[] element-wise
 def minus(v1, v2):
     v = [None,None]
     v[0] = v1[0] - v2[0]
@@ -127,11 +131,11 @@ def angle(v1, v2):
     theta = math.acos(angle)
     return theta
 
-# autopilot
-# pass trough the predefined target positions
+# autopilot to pass trough the predefined target positions
 def run_autopilot():
     # global variable pull
     global current_target_index
+    global targets
 
     # prepare the speed array
     speeds = [0.0, 0.0]
@@ -145,6 +149,9 @@ def run_autopilot():
     pos = [pos3D[0], pos3D[1]]
     north = [north3D[0], north3D[2]]
     front = [north[0], -1*north[1]]
+
+    # generate random waypoint
+    targets.append([0.00000063*random.randrange(-100,100,1),0.00000063*random.randrange(-100,100,1)])
 
     # compute the direction and the distance to the target
     direction = minus(targets[current_target_index], pos)
@@ -161,7 +168,6 @@ def run_autopilot():
     if (distance < DISTANCE_TOLERANCE):
         print("\ntarget {0} reached" .format(current_target_index + 1))
         current_target_index += 1
-        current_target_index %= TARGET_POINTS_SIZE
     
     # move the robot to the next target
     else:
@@ -170,8 +176,6 @@ def run_autopilot():
 
     # set the motor speeds
     robot_set_speed(speeds[LEFT], speeds[RIGHT])
-
- # print user instructions
 
 # main loop
 while (robot.step(TIME_STEP) != -1):
