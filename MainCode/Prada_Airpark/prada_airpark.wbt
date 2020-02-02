@@ -1,0 +1,230 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  northDirection 0 0 1
+  gpsCoordinateSystem "WGS84"
+  gpsReference 33.932367049999996 -117.63095125000001 0
+  lineScale 2
+}
+Viewpoint {
+  orientation 0 0.92 0.38 3.1416
+  position 0 762 -762
+  near 3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  translation 0 -0.02 0
+  size 688 390
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/grass.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Crossroad {
+  translation -168.358786 0.010000 -119.775782
+  name "crossroad(1)"
+  id "4018254635"
+  shape [
+    0.983130 0.000000 -2.008346
+    -0.016834 0.000000 -1.999929
+    -10.016750 0.000000 -1.914346
+    -9.982518 0.000000 2.085507
+    -9.894506 0.000000 3.571193
+    -7.279543 0.000000 6.598067
+    1.016799 0.000000 1.991512
+    0.983130 0.000000 -2.008346
+  ]
+  connectedRoadIDs [
+    "399086159"
+    "7334664_1"
+    "7334664_2"
+  ]
+}
+Crossroad {
+  translation 225.163567 0.010000 -123.088242
+  name "crossroad(2)"
+  id "54607802"
+  shape [
+    -1.920065 0.000000 -4.038979
+    -4.016693 0.000000 -1.966260
+    -3.983024 0.000000 2.033598
+    -2.081025 0.000000 3.958451
+    1.918145 0.000000 4.039891
+    1.999585 0.000000 0.040720
+    2.079144 0.000000 -3.959439
+    -1.920065 0.000000 -4.038979
+  ]
+  connectedRoadIDs [
+    "41378113"
+    "7334664_1"
+    "7334668"
+  ]
+}
+Road {
+  translation 509.573516 0.010000 -801.422289
+  name "McCarty Road"
+  id "7334668"
+  endJunction "54607802"
+  splineSubdivision 0
+  numberOfLanes 1
+  numberOfForwardLanes 1
+  speedLimit 13.888889
+  width 4.000000
+  endingAngle 0.019886
+  lines [
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    -2.842877 0.000000 158.878489
+    -8.933696 0.000000 187.127126
+    -29.999406 0.000000 209.550280
+    -55.578175 0.000000 233.863810
+    -86.228098 0.000000 265.120586
+    -119.759872 0.000000 291.602723
+    -268.853439 0.000000 387.671205
+    -279.063063 0.000000 409.496606
+    -284.330409 0.000000 674.334838
+  ]
+}
+Road {
+  translation 207.339877 0.010000 741.827238
+  name "Cucamonga Avenue"
+  id "41378113"
+  endJunction "54607802"
+  splineSubdivision 0
+  numberOfLanes 1
+  numberOfForwardLanes 1
+  speedLimit 13.888889
+  width 4.000000
+  endingAngle -3.121231
+  lines [
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    8.129936 0.000000 -388.896515
+    17.742250 0.000000 -860.916309
+  ]
+}
+Road {
+  translation -176.945810 0.010000 -114.691152
+  name "road(1)"
+  id "399086159"
+  startJunction "4018254635"
+  splineSubdivision 0
+  numberOfLanes 1
+  numberOfForwardLanes 1
+  speedLimit 13.888889
+  width 4.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle 0.858279
+  lines [
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    -4.240090 0.000000 3.663081
+    -7.891307 0.000000 12.766417
+    -8.372906 0.000000 31.025976
+    -9.153212 0.000000 76.915870
+    -9.171257 0.000000 100.977478
+    -8.525636 0.000000 116.283357
+    -6.834151 0.000000 123.811623
+    -3.536073 0.000000 131.604768
+    1.012561 0.000000 137.431852
+    8.426841 0.000000 141.679782
+    15.603740 0.000000 143.941447
+    23.780912 0.000000 144.357496
+    38.926235 0.000000 140.380944
+    76.068010 0.000000 127.535636
+    100.800092 0.000000 117.197863
+    107.777418 0.000000 111.319521
+    112.159041 0.000000 103.695463
+  ]
+}
+Road {
+  translation 221.163709 0.010000 -123.054573
+  name "McCarty Road(1)"
+  id "7334664_1"
+  startJunction "54607802"
+  endJunction "4018254635"
+  splineSubdivision 0
+  numberOfLanes 1
+  numberOfForwardLanes 1
+  speedLimit 13.888889
+  width 4.000000
+  startingAngle 1.562379
+  endingAngle 1.562379
+  lines [
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    -388.522530 0.000000 3.270374
+  ]
+}
+Road {
+  translation -178.358420 0.010000 -119.690201
+  name "McCarty Road(2)"
+  id "7334664_2"
+  startJunction "4018254635"
+  splineSubdivision 0
+  numberOfLanes 1
+  numberOfForwardLanes 1
+  speedLimit 13.888889
+  width 4.000000
+  startingAngle 1.562238
+  lines [
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    -8.875092 0.000000 0.075956
+  ]
+}
+SimpleBuilding {
+  translation -75.74 0.00 -22.91
+  name "Pomona Valley Model Airplane Club"
+  corners [
+    0.00 0.00,
+    -0.84 -4.57,
+    -8.29 -2.65,
+    -7.33 1.67,
+  ]
+  roofShape "pyramidal roof"
+  wallType "old brick wall"
+  floorNumber 3
+  floorHeight 3
+}
