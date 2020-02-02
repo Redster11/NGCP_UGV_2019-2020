@@ -4,7 +4,7 @@
 #Waypoint navigation can be cancelled at any time by pressing W, A, S, or D.
 #The waypoint can be changed by updating the GPSDestination cordinates in the main loop at the bottom. 
 
-from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Compass
+from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Compass, CameraRecognitionObject
 import math
 
 #global variables
@@ -212,8 +212,8 @@ while robot.step(timestep) != -1:
  
     key = input.getKey()
     stop_moving()
-
-    
+    #objectRecognized = False
+            
     tempLocation = gps.getValues() #gets 3D GPS location in standard cordinate system
     currentLocation = (tempLocation[0], -tempLocation[1]) #Converts to 2D
     
@@ -223,11 +223,30 @@ while robot.step(timestep) != -1:
     
     gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
         
-    if(key > -1):
-        read_keyboard_input(key,maxSpeed)
-    if(autoPilot == True):
-        auto_pilot(maxSpeed, gpsDestination)
-        
+    #if(key > -1):
+       # read_keyboard_input(key,maxSpeed)
+    #if(autoPilot == True):
+        #auto_pilot(maxSpeed, gpsDestination)
+    
+    objectFound = False
+    
+    objects = camera.getRecognitionNumberOfObjects()
+    recognized = camera.getRecognitionObjects()
+    if(objects > 0):
+        objectFound = True
+    
+    if(objectFound == False):
+        turn_left(maxSpeed/5)
+
+    if(objectFound):
+        objectPosition = recognized[0].get_position_on_image()
+        if(objectPosition[0] > 32):
+            turn_right(maxSpeed/5)
+        elif(objectPosition[0]<29):
+            turn_left(maxSpeed/5)
+        else:
+            break
+    print("Object found and centered")
     #uncomment the following line to see location and heading information    
     #print(currentLocation, currentHeading)
        
