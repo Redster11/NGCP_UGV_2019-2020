@@ -3,8 +3,8 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.27814522065761044 0.922036837558204 0.26922723935552223 4.641441915774213
-  position -2.957534904305279 1.9337559505331985 0.12082037791869649
+  orientation 0.2627507562717918 0.940549404942068 0.21524139225930364 4.822253988164067
+  position -3.1233407749123354 1.5811259992468374 1.0931534465256199
   follow "SUGV:body"
 }
 TexturedBackground {
@@ -14,13 +14,42 @@ TexturedBackgroundLight {
 RectangleArena {
   floorSize 10 10
 }
+Solid {
+  translation 0 0.1 0
+  scale 2 2 2
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+  }
+  recognitionColors [
+    0.9 0 0
+  ]
+}
 WoodenBox {
   translation 2.37609 0.3 2.36027
 }
 DEF SUGV Robot {
-  translation 0 0.16 0
+  translation 0.055341 0.16 0.753686
   rotation 0 1 0 -1.5707953071795862
   children [
+    Camera {
+      translation 0 0.04 0
+      recognition Recognition {
+      }
+    }
     Compass {
       rotation 0 1 0 1.5708
     }
@@ -254,5 +283,8 @@ DEF SUGV Robot {
   }
   physics Physics {
   }
-  controller "NGCP_2020_Robot_Controller"
+  recognitionColors [
+    0 0 0
+  ]
+  controller "NGCP_2020_Robot_Controll_Camera_Rec"
 }
