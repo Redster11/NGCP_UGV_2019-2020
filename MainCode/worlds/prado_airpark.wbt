@@ -1,0 +1,193 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  northDirection 0 0 1
+  gpsCoordinateSystem "WGS84"
+  gpsReference 33.932367049999996 -117.63095125000001 0
+  lineScale 2
+}
+Viewpoint {
+  orientation -0.4291952384796442 0.8539783812992672 0.29412985489386284 1.3525191656018978
+  position 335.35610934698764 137.2955614920299 7.023612703535132
+  near 3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  translation 0 -0.02 0
+  size 678 380
+  tileSize 990 715
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "F:/OneDrive/GitHub/Cjkeenan/NGCP_UGV_2019-2020/MainCode/Prado_Airpark/satellite_image.png"
+      ]
+      filtering 6
+    }
+    roughness 1
+    metalness 0
+    textureTransform TextureTransform {
+      rotation 3.14
+      translation -172 69
+    }
+  }
+}
+Crossroad {
+  translation -168.358786 0.01 -119.775782
+  name "crossroad(1)"
+  id "4018254635"
+  shape [
+    0.98313 0 -2.008346
+    -0.016834 0 -1.999929
+    -10.01675 0 -1.914346
+    -9.982518 0 2.085507
+    -9.894506 0 3.571193
+    -7.279543 0 6.598067
+    1.016799 0 1.991512
+    0.98313 0 -2.008346
+  ]
+  connectedRoadIDs [
+    "399086159"
+    "7334664_1"
+    "7334664_2"
+  ]
+}
+Road {
+  translation -176.94581 0.01 -114.691152
+  name "road(1)"
+  id "399086159"
+  startJunction "4018254635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -4.24009 0 3.663081
+    -7.891307 0 12.766417
+    -8.372906 0 31.025976
+    -9.153212 0 76.91587
+    -9.171257 0 100.977478
+    -8.525636 0 116.283357
+    -6.834151 0 123.811623
+    -3.536073 0 131.604768
+    1.012561 0 137.431852
+    8.426841 0 141.679782
+    15.60374 0 143.941447
+    23.780912 0 144.357496
+    38.926235 0 140.380944
+    76.06801 0 127.535636
+    100.800092 0 117.197863
+    107.777418 0 111.319521
+    112.159041 0 103.695463
+  ]
+  startingAngle [
+    0.858279
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 221.175 0.01 -123.055
+  name "McCarty Road(1)"
+  id "7334664_1"
+  startJunction "54607802"
+  endJunction "4018245635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -388.532 0 3.27037
+  ]
+  startingAngle [
+    1.562379
+  ]
+  endingAngle [
+    1.562379
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 212 0 -195
+  rotation 0 1 0 1.547
+  name "McCarty Road(3)"
+  id "7334664_1"
+  startJunction "54607802"
+  endJunction "4018245635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -388.532 0 3.27037
+  ]
+  startingAngle [
+    1.56
+  ]
+  endingAngle [
+    1.56
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -178.35842 0.01 -119.690201
+  name "McCarty Road(2)"
+  id "7334664_2"
+  startJunction "4018254635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -8.875092 0 0.075956
+  ]
+  startingAngle [
+    1.562238
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+SimpleBuilding {
+  translation -78.1 0 -23.73
+  name "Pomona Valley Model Airplane Club"
+  corners [
+    0 0
+    -0.84 -4.57
+    -8.29 -2.65
+    -7.33 1.67
+  ]
+  wallType "old brick wall"
+}
