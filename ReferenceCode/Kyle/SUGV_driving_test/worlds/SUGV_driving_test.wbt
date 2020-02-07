@@ -3,9 +3,8 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation -0.040552876939862856 -0.9868770125550039 -0.15629851650739005 2.6790390565472046
-  position -0.9257346937394768 0.7928588177487428 -1.563929946504009
-  follow "SUGV:body"
+  orientation -0.06584973014045924 -0.9977344431215147 -0.013776576114177748 1.5247071846591043
+  position -3.943666859063882 0.6610360588477615 -0.920993806965165
   followType "Mounted Shot"
 }
 TexturedBackground {
@@ -14,6 +13,127 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   floorSize 15 15
+}
+DEF BUGV Robot {
+  translation -0.46 0.04 0
+  children [
+    DEF BUGV Transform {
+      translation 0.07 0.04 0
+      scale 2 2 2
+      children [
+        Solid {
+          children [
+            DEF diamond Transform {
+              translation -0.095 0 -0.220575
+              rotation 1 0 0 -0.261799
+              children [
+                Transform {
+                  translation 0 -0.005 0
+                  rotation 0 1 0 0.78539
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.05 0.05
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Ramp_R Transform {
+              translation -0.19 0 -0.2
+              children [
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Base Transform {
+              translation -0.095 0.0149 0.145
+              children [
+                Shape {
+                  appearance FlexibleAluminiumDuct {
+                  }
+                  geometry Box {
+                    size 0.3 0.05 0.4
+                  }
+                }
+              ]
+            }
+            DEF Ramp_L Transform {
+              translation 0 0 -0.2
+              children [
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Ramp_M Transform {
+              translation 0 0 -0.2
+              children [
+                Transform {
+                  translation -0.095 0 0
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 1 1 1
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          boundingObject USE Base
+        }
+      ]
+    }
+  ]
+  boundingObject Transform {
+    translation -0.115 0.0379 -0.393984
+    rotation 1 0 0 -0.261799
+    scale 2 2 2
+    children [
+      Box {
+        size 0.3 0.005 0.3
+      }
+    ]
+  }
 }
 DEF SUGV Robot {
   translation 0 0.16 0
@@ -30,6 +150,8 @@ DEF SUGV Robot {
       device [
         RotationalMotor {
           name "Motor_LB"
+          maxVelocity 100
+          maxTorque 100
         }
       ]
       endPoint Solid {
@@ -93,6 +215,8 @@ DEF SUGV Robot {
       device [
         RotationalMotor {
           name "Motor_LF"
+          maxVelocity 100
+          maxTorque 100
         }
       ]
       endPoint Solid {
@@ -127,6 +251,8 @@ DEF SUGV Robot {
       device [
         RotationalMotor {
           name "Motor_RB"
+          maxVelocity 100
+          maxTorque 100
         }
       ]
       endPoint Solid {
@@ -190,6 +316,8 @@ DEF SUGV Robot {
       device [
         RotationalMotor {
           name "Motor_RF"
+          maxVelocity 100
+          maxTorque 100
         }
       ]
       endPoint Solid {
