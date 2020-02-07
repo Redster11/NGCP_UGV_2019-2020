@@ -20,7 +20,7 @@ TexturedBackgroundLight {
 }
 Floor {
   translation 0 -0.02 0
-  size 678 380
+  size 688 390
   tileSize 990 715
   appearance PBRAppearance {
     baseColorMap ImageTexture {
@@ -33,7 +33,7 @@ Floor {
     metalness 0
     textureTransform TextureTransform {
       rotation 3.14
-      translation -172 69
+      translation -167 66
     }
   }
 }
