@@ -20,6 +20,10 @@ gps.enable(250)
 compass = robot.getCompass('compass')
 compass.enable(250)
 
+camera = robot.getCamera('camera')
+camera.enable(100)
+camera.recognitionEnable(100)
+
 headingAdjusted = False
 previousKey = 61
 
@@ -208,6 +212,7 @@ while robot.step(timestep) != -1:
  
     key = input.getKey()
     stop_moving()
+
     
     tempLocation = gps.getValues() #gets 3D GPS location in standard cordinate system
     currentLocation = (tempLocation[0], -tempLocation[1]) #Converts to 2D
@@ -217,7 +222,7 @@ while robot.step(timestep) != -1:
     currentHeading = abs((currentHeading-360)%360)
     
     gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
-    
+        
     if(key > -1):
         read_keyboard_input(key,maxSpeed)
     if(autoPilot == True):

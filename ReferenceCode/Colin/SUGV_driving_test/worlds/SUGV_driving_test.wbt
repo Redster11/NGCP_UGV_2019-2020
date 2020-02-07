@@ -3,8 +3,8 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.05242987834721839 0.9847485552045294 0.16589572290775847 3.708520615458634
-  position -0.9505687745902518 0.7735606466811396 -1.4321430184632267
+  orientation 0.25417480859135966 0.9492940863837198 0.18502946855688832 4.942553511041744
+  position -3.129103149412509 1.5084307463116469 0.9835219271698284
   follow "SUGV:body"
   followType "Mounted Shot"
 }
@@ -15,9 +15,53 @@ TexturedBackgroundLight {
 RectangleArena {
   floorSize 20 20
 }
+Solid {
+  translation 0 0.12 1.05
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.1 0.3
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+  }
+  recognitionColors [
+    0 0.1 0.3
+  ]
+}
 DEF SUGV Robot {
   translation 0 0.16 0
   children [
+    Camera {
+      translation 0 0.0499992 0.16
+      rotation 0 1 0 3.14159
+      children [
+        DEF camera Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0
+            }
+          }
+          geometry Box {
+            size 0.015 0.015 0.015
+          }
+        }
+      ]
+      boundingObject USE camera
+      physics Physics {
+      }
+      recognition Recognition {
+      }
+    }
     TouchSensor {
       translation 0 0 0.16
       scale 0.458998 0.458998 0.458998
@@ -270,5 +314,5 @@ DEF SUGV Robot {
   }
   physics Physics {
   }
-  controller "<extern>"
+  controller "moose_controller"
 }
