@@ -4,7 +4,7 @@
 #Waypoint navigation can be cancelled at any time by pressing W, A, S, or D.
 #The waypoint can be changed by updating the GPSDestination cordinates in the main loop at the bottom. 
 
-from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Compass, CameraRecognitionObject
+from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Compass, CameraRecognitionObject, TouchSensor
 import math
 
 #global variables
@@ -25,6 +25,9 @@ compass.enable(250)
 camera = robot.getCamera('camera')
 camera.enable(100)
 camera.recognitionEnable(100)
+
+sensor = robot.getTouchSensor('touch sensor')
+sensor.enable(100)
 
 
 headingAdjusted = False
@@ -191,7 +194,7 @@ def auto_pilot(maxSpeed, gpsDestination):
         turn_right(maxSpeed/5)
     if(angleDifference > 180 and headingAdjusted == False):
        turn_left(maxSpeed/5)
-    if(angleDifference < 2 or angleDifference > 358):
+    if(angleDifference < 3 or angleDifference > 357):
         headingAdjusted = True
         
     if(targetDistance>0.2 and headingAdjusted == True):
@@ -201,6 +204,8 @@ def auto_pilot(maxSpeed, gpsDestination):
         state = 2
         
 def locateAndCenter(maxSpeed):
+    global state
+    
     objectFound = False
     
     objects = camera.getRecognitionNumberOfObjects()
@@ -209,15 +214,16 @@ def locateAndCenter(maxSpeed):
         objectFound = True
     
     if(objectFound == False):
-        turn_left(maxSpeed/5)
+        turn_right(maxSpeed/5)
 
     if(objectFound):
         objectPosition = recognized[0].get_position_on_image()
+        print(objectPosition[0])
         if(objectPosition[0] > 32):
             turn_right(maxSpeed/5)
-        elif(objectPosition[0]<29):
+        if(objectPosition[0]<29):
             turn_left(maxSpeed/5)
-        else:
+        if(objectPosition[0] <= 32 and objectPosition[0] >=29):
             state = 3
    
 
@@ -244,7 +250,10 @@ while robot.step(timestep) != -1:
     currentHeading = math.degrees(math.atan2(headingVector[2],headingVector[0]))
     currentHeading = abs((currentHeading-360)%360)
     
-    gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
+    gpsDestination = (1.5920715449556217e-05, 1.537514772360986e-05)
+    
+    madeContact = sensor.getValue()
+    print(madeContact)
     
     if(state == 1):
         auto_pilot(maxSpeed, gpsDestination)
@@ -254,7 +263,11 @@ while robot.step(timestep) != -1:
         locateAndCenter(maxSpeed)
         
     if(state == 3):
-        stop_moving()
+        if(madeContact == 0.0):
+            move_forward(maxSpeed)
+        else:
+            print("stopped")
+            stop_moving()
         
     #if(key > -1):
        # read_keyboard_input(key,maxSpeed)
@@ -265,6 +278,6 @@ while robot.step(timestep) != -1:
     
             
     #uncomment the following line to see location and heading information    
-    #print(currentLocation, currentHeading)
+   # print(currentLocation, currentHeading)
        
 
