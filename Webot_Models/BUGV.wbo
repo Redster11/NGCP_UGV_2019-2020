@@ -1,105 +1,122 @@
 #VRML_OBJ R2020a utf8
 DEF BUGV Robot {
-  translation -0.46 0.09 0
+  translation -0.46 0.04 0
   children [
-    Solid {
+    DEF BUGV Transform {
+      translation 0.07 0.04 0
+      scale 2 2 2
       children [
-        DEF diamond Transform {
-          translation -0.095 0 -0.220575
-          rotation 1 0 0 -0.261799
+        Solid {
           children [
-            Transform {
-              translation 0 -0.005 0
-              rotation 0 1 0 0.78539
-              children [
-                Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0 0.1 0.3
-                    }
-                  }
-                  geometry Plane {
-                    size 0.05 0.05
-                  }
-                }
-              ]
-            }
-          ]
-        }
-        DEF Ramp_R Transform {
-          translation -0.19 0 -0.2
-          children [
-            Transform {
+            DEF diamond Transform {
+              translation -0.095 0 -0.220575
               rotation 1 0 0 -0.261799
               children [
-                Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0 0.1 0.3
+                Transform {
+                  translation 0 -0.005 0
+                  rotation 0 1 0 0.78539
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.05 0.05
+                      }
                     }
-                  }
-                  geometry Plane {
-                    size 0.0985747062188375 0.3028649562213102
-                  }
+                  ]
                 }
               ]
             }
-          ]
-        }
-        DEF Base Transform {
-          translation -0.095 0.0149 0.145
-          children [
-            Shape {
-              appearance FlexibleAluminiumDuct {
-              }
-              geometry Box {
-                size 0.3 0.05 0.4
-              }
+            DEF Ramp_R Transform {
+              translation -0.19 0 -0.2
+              children [
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
             }
-          ]
-        }
-        DEF Ramp_L Transform {
-          translation 0 0 -0.2
-          children [
-            Transform {
-              rotation 1 0 0 -0.261799
+            DEF Base Transform {
+              translation -0.095 0.0149 0.145
               children [
                 Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0 0.1 0.3
-                    }
+                  appearance FlexibleAluminiumDuct {
                   }
-                  geometry Plane {
-                    size 0.0985747062188375 0.3028649562213102
+                  geometry Box {
+                    size 0.3 0.05 0.4
                   }
                 }
               ]
             }
-          ]
-        }
-        DEF Ramp_M Transform {
-          translation 0 0 -0.2
-          children [
-            Transform {
-              translation -0.095 0 0
-              rotation 1 0 0 -0.261799
+            DEF Ramp_L Transform {
+              translation 0 0 -0.2
               children [
-                Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 1 1 1
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
                     }
-                  }
-                  geometry Plane {
-                    size 0.0985747062188375 0.3028649562213102
-                  }
+                  ]
+                }
+              ]
+            }
+            DEF Ramp_M Transform {
+              translation 0 0 -0.2
+              children [
+                Transform {
+                  translation -0.095 0 0
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 1 1 1
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
                 }
               ]
             }
           ]
+          boundingObject USE Base
         }
       ]
     }
   ]
+  boundingObject Transform {
+    translation -0.115 0.0379 -0.393984
+    rotation 1 0 0 -0.261799
+    scale 2 2 2
+    children [
+      Box {
+        size 0.3 0.005 0.3
+      }
+    ]
+  }
 }
