@@ -1,7 +1,6 @@
 #VRML_OBJ R2020a utf8
 DEF SUGV Robot {
-  translation 5.434884536426238 0.06502786867787705 2.0909002913709984
-  rotation 9.818947999648843e-05 0.9999999926055375 -7.174782879852147e-05 1.2193020601434637
+  translation 0 0.16 0
   children [
     Camera {
       translation 0 0.0499992 0.16
@@ -24,12 +23,9 @@ DEF SUGV Robot {
       fieldOfView 1.0472
       width 1296
       height 976
-      recognition Recognition {
-      }
     }
     TouchSensor {
-      translation 2.2604140781368187e-12 -7.589119121048649e-07 0.16000000010566495
-      rotation 0.9985628430935718 5.221145606764353e-06 0.05359336120847966 -5.2598411163215024e-17
+      translation 0 0 0.16
       scale 0.458998 0.458998 0.458998
       children [
         DEF Bumper Shape {
@@ -47,8 +43,6 @@ DEF SUGV Robot {
       physics Physics {
       }
       translationStep 0.001
-      linearVelocity 8.495242544470273e-15 8.08258925937764e-16 -8.50600096602856e-16
-      angularVelocity -2.346588299108748e-15 2.9514572415768696e-15 5.002361894309331e-15
     }
     Compass {
       yAxis FALSE
@@ -57,7 +51,6 @@ DEF SUGV Robot {
     }
     DEF Wheel_LB HingeJoint {
       jointParameters HingeJointParameters {
-        position 146.88691451499488
         anchor 0.13 -0.0499998 -0.11
       }
       device [
@@ -68,7 +61,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation 0.13 -0.0499998 -0.11
-        rotation -0.6799035236251031 0.6799060210547826 -0.2746980180045398 3.677761655100748
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -89,18 +82,15 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity -2.7019158546662234e-16 1.5783462847408903e-15 3.501506735624108e-16
-        angularVelocity -4.0045927354880373e-14 2.942402858034693e-15 -1.2791439353488683e-14
       }
     }
     DEF Wheel_RM HingeJoint {
       jointParameters HingeJointParameters {
-        position 150.63041401309172
         anchor 0.13 -0.05 0
       }
       endPoint Solid {
         translation 0.13 -0.05 0
-        rotation -0.08263743586035777 0.08263773940516639 0.9931475510821285 1.577675980485648
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -121,13 +111,10 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity 5.457204852880836e-16 5.888814799407253e-15 -8.001679891333262e-16
-        angularVelocity -6.334144520230995e-15 3.281759735921276e-15 -2.873396735237756e-14
       }
     }
     DEF Wheel_LF HingeJoint {
       jointParameters HingeJointParameters {
-        position 146.88689395459224
         anchor 0.13 -0.0500003 0.11
       }
       device [
@@ -138,7 +125,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation 0.13 -0.0500003 0.11
-        rotation -0.6799020050804712 0.6799045025045728 -0.2747055350035095 3.677775634175343
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -159,13 +146,10 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity -6.365551450739422e-16 -1.8566541933720695e-15 1.3505473477469816e-15
-        angularVelocity 9.583443611592756e-14 2.956536060955908e-15 5.1831767484913047e-14
       }
     }
     DEF Wheel_RB HingeJoint {
       jointParameters HingeJointParameters {
-        position 162.8729928632375
         anchor -0.13 -0.0500008 -0.11
       }
       device [
@@ -176,7 +160,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation -0.13 -0.0500008 -0.11
-        rotation -0.2356425823804125 0.23564344794553835 0.9428386600099877 1.6296261393681548
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -197,18 +181,15 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity -7.058725558506742e-16 4.142199547252994e-15 2.2003696655086867e-15
-        angularVelocity 8.580143465157965e-14 3.639817995866978e-15 4.14292228454101e-14
       }
     }
     DEF Wheel_LM HingeJoint {
       jointParameters HingeJointParameters {
-        position 158.2900805086895
         anchor -0.13 -0.0500008 0
       }
       endPoint Solid {
         translation -0.13 -0.0500008 0
-        rotation -0.4945102141931174 0.494512030633896 -0.7147849324216466 4.382749120747659
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -229,13 +210,10 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity 5.675741151525001e-15 -3.925876532938169e-15 -1.5438239439691164e-15
-        angularVelocity -6.78846687103484e-14 2.944278442979714e-15 -1.544841865931464e-13
       }
     }
     DEF Wheel_RF HingeJoint {
       jointParameters HingeJointParameters {
-        position 162.87297284972288
         anchor -0.13 -0.0500008 0.11
       }
       device [
@@ -246,7 +224,7 @@ DEF SUGV Robot {
       ]
       endPoint Solid {
         translation -0.13 -0.0500008 0.11
-        rotation -0.235651493176659 0.23565235877451612 0.9428342057687649 1.6296308554935892
+        rotation 0 0 1 1.5708
         children [
           Shape {
             appearance Appearance {
@@ -267,8 +245,6 @@ DEF SUGV Robot {
         }
         physics Physics {
         }
-        linearVelocity 1.542926998584795e-15 -2.7868297698286085e-15 -4.188320659963205e-15
-        angularVelocity -2.149046876633453e-13 2.948353216663752e-15 -6.299933371363722e-14
       }
     }
     DEF Body Solid {
@@ -305,6 +281,4 @@ DEF SUGV Robot {
   physics Physics {
   }
   controller "<extern>"
-  linearVelocity 1.0836362842024499e-14 1.2235297341694015e-16 5.3789782933023097e-17
-  angularVelocity -4.459666936573002e-15 2.9513621369456934e-15 4.5279710799139525e-15
 }
