@@ -1,37 +1,10 @@
-#VRML_SIM R2020a utf8
-WorldInfo {
-  gpsCoordinateSystem "WGS84"
-}
-Viewpoint {
-  orientation 0.17339231031955157 0.9705656734508656 0.1671447882553202 4.68341079917136
-  position -8.44342744187577 3.851256621737856 0.44583816620965816
-}
+#VRML_OBJ R2020a utf8
 DEF SUGV Robot {
-  translation -0.671249 0.16 3.66394
+  translation 0.055341 0.16 0.753686
   rotation 0 1 0 -1.5707953071795862
   children [
-    TouchSensor {
-      translation 0 -0.024 -0.165
-      scale 0.458998 0.458998 0.458998
-      children [
-        DEF Bumper Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0 0 0
-            }
-          }
-          geometry Box {
-            size 0.1 0.1 0.05
-          }
-        }
-      ]
-      boundingObject USE Bumper
-      physics Physics {
-      }
-      translationStep 0.001
-    }
     Camera {
-      translation 0 0.07 0
+      translation 0 0.04 0
       recognition Recognition {
       }
     }
@@ -257,7 +230,7 @@ DEF SUGV Robot {
       }
     }
   ]
-  name "SUGV(1)"
+  name "SUGV"
   boundingObject Transform {
     translation 0 0.0178 0
     children [
@@ -272,39 +245,4 @@ DEF SUGV Robot {
     0 0 0
   ]
   controller "NGCP_2020_Robot_Controll_Camera_Rec"
-}
-TexturedBackground {
-}
-TexturedBackgroundLight {
-}
-RectangleArena {
-  floorSize 10 10
-}
-Solid {
-  translation 0.323388 0.1 -1.24437
-  scale 2 2 2
-  children [
-    Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 1 0 0
-        }
-      }
-      geometry Box {
-        size 0.1 0.1 0.1
-      }
-    }
-  ]
-  boundingObject Box {
-    size 0.1 0.1 0.1
-  }
-  physics Physics {
-  }
-  recognitionColors [
-    0.9 0 0
-  ]
-}
-WoodenBox {
-  translation 0.281511 0.3 -0.518987
-  rotation 1 0 0 4.692820414042842e-06
 }
