@@ -1,9 +1,9 @@
 """keyboard controller with Autonomy for SUGV"""
-from controller import Robot, Motor, Keyboard, GPS, Compass
+from controller import Robot, Motor, Keyboard, GPS, Compass, Camera, CameraRecognitionObject
 import math, random
 
 # Constants
-MAX_SPEED = 10
+MAX_SPEED = 60
 # TIME_STEP = 64
 INCREMENT = 0.1
 TURN_COEFFICIENT = 2.0
@@ -15,7 +15,7 @@ RIGHT = 1
 # Globals
 current_target_index = 0
 # targets = [[0.00001, 0.00004], [0.00000, 0.00000], [-0.00000, -0.00004], [-0.0000, -0.00001]]
-targets = [[0,0]]
+targets = [[33.9323671, -117.6309513]]
 autopilot = False
 old_autopilot = False
 old_key = -1
@@ -29,10 +29,16 @@ kb.enable(250)
 
 # instantiate devices on Robot
 motors = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
+
 gps = GPS('gps')
 gps.enable(250)
+
 compass = Compass('compass')
 compass.enable(250)
+
+camera = Camera('camera')
+camera.enable(250)
+camera.recognitionEnable(100)
 
 # get timestep
 TIME_STEP = int(robot.getBasicTimeStep())
@@ -83,7 +89,7 @@ def check_keyboard():
         if(key == ord('P')):
             if (key != old_key):  # perform this action just once
                 pos3D = gps.getValues()
-                print("position: {0:.3f}, {1:.3f}" .format(pos3D[0], pos3D[1]))
+                print("position: {0:.7f}, {1:.7f}" .format(pos3D[0], pos3D[1]))
         if(key == ord('A')):
             if (key != old_key):  # perform this action just once
                 autopilot = not autopilot
@@ -151,7 +157,8 @@ def run_autopilot():
     front = [north[0], -1*north[1]]
 
     # generate random waypoint
-    targets.append([0.00000063*random.randrange(-100,100,1),0.00000063*random.randrange(-100,100,1)])
+    # targets.append([0.00000063*random.randrange(-100,100,1),0.00000063*random.randrange(-100,100,1)])
+    targets.append([random.uniform(33.9314620, 33.9325890), random.uniform(-117.6312430, -117.6330461)])
 
     # compute the direction and the distance to the target
     direction = minus(targets[current_target_index], pos)

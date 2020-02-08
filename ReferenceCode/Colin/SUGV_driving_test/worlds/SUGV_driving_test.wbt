@@ -59,6 +59,9 @@ DEF SUGV Robot {
       boundingObject USE camera
       physics Physics {
       }
+      fieldOfView 1.0472
+      width 1296
+      height 976
       recognition Recognition {
       }
     }
@@ -314,5 +317,5 @@ DEF SUGV Robot {
   }
   physics Physics {
   }
-  controller "moose_controller"
+  controller "<extern>"
 }
