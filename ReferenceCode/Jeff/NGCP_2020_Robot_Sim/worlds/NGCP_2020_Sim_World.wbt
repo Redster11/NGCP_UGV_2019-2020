@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.2627507562717918 0.940549404942068 0.21524139225930364 4.822253988164067
-  position -3.1233407749123354 1.5811259992468374 1.0931534465256199
+  position -6.234744843469182 3.1338466642378267 1.6239356251059178
   follow "SUGV:body"
 }
 TexturedBackground {
@@ -15,7 +15,7 @@ RectangleArena {
   floorSize 10 10
 }
 Solid {
-  translation 0 0.1 0
+  translation 1.78147 0.1 2.72486
   scale 2 2 2
   children [
     Shape {
@@ -39,7 +39,7 @@ Solid {
   ]
 }
 WoodenBox {
-  translation 2.37609 0.3 2.36027
+  translation 2.66953 0.3 -1.11594
 }
 DEF SUGV Robot {
   translation 0.055341 0.16 0.753686
