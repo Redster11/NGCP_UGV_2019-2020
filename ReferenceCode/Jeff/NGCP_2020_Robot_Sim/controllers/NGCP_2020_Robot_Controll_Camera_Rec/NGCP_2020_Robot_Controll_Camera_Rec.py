@@ -214,7 +214,7 @@ def locateAndCenter(maxSpeed):
         objectFound = True
     
     if(objectFound == False):
-        turn_right(maxSpeed/5)
+        turn_left(maxSpeed/5)
 
     if(objectFound):
         objectPosition = recognized[0].get_position_on_image()
@@ -234,6 +234,7 @@ maxSpeed = -10 #speed is negative because robot is backwards
 input = robot.getKeyboard()
 input.enable(100)    
 initilize_motors()
+count = 0
 
 
 
@@ -253,7 +254,6 @@ while robot.step(timestep) != -1:
     gpsDestination = (1.5920715449556217e-05, 1.537514772360986e-05)
     
     madeContact = sensor.getValue()
-    print(madeContact)
     
     if(state == 1):
         auto_pilot(maxSpeed, gpsDestination)
@@ -266,9 +266,26 @@ while robot.step(timestep) != -1:
         if(madeContact == 0.0):
             move_forward(maxSpeed)
         else:
-            print("stopped")
+            state = 4
             stop_moving()
+    if(state == 4):
+         count += 1
+         print(count)
+         if(count == (int)(1000/64)*10):
+             state = 5
+             count = 0
+    if(state == 5):
+         print(count)
+         move_backward(maxSpeed)
+         count += 1
+         if(count == (int)(1000/64)*5):
+             state = 6
+    if(state == 6):
+        if(key > -1):
+            read_keyboard_input(key,maxSpeed)
         
+
+                 
     #if(key > -1):
        # read_keyboard_input(key,maxSpeed)
     #if(autoPilot == True):
