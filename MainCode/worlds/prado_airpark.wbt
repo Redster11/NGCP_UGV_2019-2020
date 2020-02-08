@@ -1,0 +1,586 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  northDirection 0 0 1
+  gpsCoordinateSystem "WGS84"
+  gpsReference 33.932367049999996 -117.63095125000001 0
+  lineScale 2
+}
+Viewpoint {
+  orientation -0.03908442848913677 -0.9713742793492509 -0.23431691545511796 2.8203190916099707
+  position -1.8753942431149246 2.4661403389664787 -4.679945176037296
+  near 3
+  follow "SUGV"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  translation 0 -0.02 0
+  size 688 390
+  tileSize 990 715
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "C:/Users/Colin Keenan/OneDrive/GitHub/Cjkeenan/NGCP_UGV_2019-2020/MainCode/Prado_Airpark/satellite_image.png"
+      ]
+      filtering 6
+    }
+    roughness 1
+    metalness 0
+    textureTransform TextureTransform {
+      rotation 3.14
+      translation -167 66
+    }
+  }
+}
+Crossroad {
+  translation -168.358786 0.01 -119.775782
+  name "crossroad(1)"
+  id "4018254635"
+  shape [
+    0.98313 0 -2.008346
+    -0.016834 0 -1.999929
+    -10.01675 0 -1.914346
+    -9.982518 0 2.085507
+    -9.894506 0 3.571193
+    -7.279543 0 6.598067
+    1.016799 0 1.991512
+    0.98313 0 -2.008346
+  ]
+  connectedRoadIDs [
+    "399086159"
+    "7334664_1"
+    "7334664_2"
+  ]
+}
+Road {
+  translation -176.94581 0.01 -114.691152
+  name "road(1)"
+  id "399086159"
+  startJunction "4018254635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -4.24009 0 3.663081
+    -7.891307 0 12.766417
+    -8.372906 0 31.025976
+    -9.153212 0 76.91587
+    -9.171257 0 100.977478
+    -8.525636 0 116.283357
+    -6.834151 0 123.811623
+    -3.536073 0 131.604768
+    1.012561 0 137.431852
+    8.426841 0 141.679782
+    15.60374 0 143.941447
+    23.780912 0 144.357496
+    38.926235 0 140.380944
+    76.06801 0 127.535636
+    100.800092 0 117.197863
+    107.777418 0 111.319521
+    112.159041 0 103.695463
+  ]
+  startingAngle [
+    0.858279
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 221.175 0.01 -123.055
+  name "McCarty Road(1)"
+  id "7334664_1"
+  startJunction "54607802"
+  endJunction "4018245635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -388.532 0 3.27037
+  ]
+  startingAngle [
+    1.562379
+  ]
+  endingAngle [
+    1.562379
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 212 0 -195
+  rotation 0 1 0 1.547
+  name "McCarty Road(3)"
+  id "7334664_1"
+  startJunction "54607802"
+  endJunction "4018245635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -388.532 0 3.27037
+  ]
+  startingAngle [
+    1.56
+  ]
+  endingAngle [
+    1.56
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  endLine [
+    "textures/road_line_triangle.png"
+    "textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -178.35842 0.01 -119.690201
+  name "McCarty Road(2)"
+  id "7334664_2"
+  startJunction "4018254635"
+  width 4
+  numberOfLanes 1
+  speedLimit 13.888889
+  lines []
+  wayPoints [
+    0 0 0
+    -8.875092 0 0.075956
+  ]
+  startingAngle [
+    1.562238
+  ]
+  startLine [
+    "textures/road_line_dashed.png"
+    "textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+SimpleBuilding {
+  translation -78.1 0 -23.73
+  name "Pomona Valley Model Airplane Club"
+  corners [
+    0 0
+    -0.84 -4.57
+    -8.29 -2.65
+    -7.33 1.67
+  ]
+  wallType "old brick wall"
+}
+DEF SUGV Robot {
+  translation 0 0.16 0
+  children [
+    Camera {
+      translation 0 0.0499992 0.16
+      rotation 0 1 0 3.14159
+      children [
+        DEF camera Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0
+            }
+          }
+          geometry Box {
+            size 0.015 0.015 0.015
+          }
+        }
+      ]
+      boundingObject USE camera
+      physics Physics {
+      }
+      fieldOfView 1.0472
+      width 1296
+      height 976
+    }
+    TouchSensor {
+      translation 0 0 0.16
+      scale 0.458998 0.458998 0.458998
+      children [
+        DEF Bumper Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0
+            }
+          }
+          geometry Box {
+            size 0.1 0.1 0.05
+          }
+        }
+      ]
+      boundingObject USE Bumper
+      physics Physics {
+      }
+      translationStep 0.001
+    }
+    Compass {
+      yAxis FALSE
+    }
+    GPS {
+    }
+    DEF Wheel_LB HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.0499998 -0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_LB"
+          maxVelocity 60
+        }
+      ]
+      endPoint Solid {
+        translation 0.13 -0.0499998 -0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 1
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LB"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RM HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.05 0
+      }
+      endPoint Solid {
+        translation 0.13 -0.05 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RM"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_LF HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.0500003 0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_LF"
+          maxVelocity 60
+        }
+      ]
+      endPoint Solid {
+        translation 0.13 -0.0500003 0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LF"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RB HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 -0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_RB"
+          maxVelocity 60
+        }
+      ]
+      endPoint Solid {
+        translation -0.13 -0.0500008 -0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 1
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RB"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_LM HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 0
+      }
+      endPoint Solid {
+        translation -0.13 -0.0500008 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LM"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RF HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_RF"
+          maxVelocity 60
+        }
+      ]
+      endPoint Solid {
+        translation -0.13 -0.0500008 0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RF"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Body Solid {
+      translation 0 0.0178 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0 0
+            }
+          }
+          geometry Box {
+            size 0.2286 0.16 0.3048
+          }
+        }
+      ]
+      name "body"
+      boundingObject Box {
+        size 0.2286 0.16 0.3048
+      }
+      physics Physics {
+      }
+    }
+  ]
+  name "SUGV"
+  boundingObject Transform {
+    translation 0 0.0178 0
+    children [
+      Box {
+        size 0.2286 0.16 0.3048
+      }
+    ]
+  }
+  physics Physics {
+  }
+  controller "<extern>"
+}
+DEF BUGV Robot {
+  translation -0.46 0.09 0
+  scale 2 2 2
+  children [
+    Solid {
+      children [
+        DEF diamond Transform {
+          translation -0.095 0 -0.220575
+          rotation 1 0 0 -0.261799
+          children [
+            Transform {
+              translation 0 -0.005 0
+              rotation 0 1 0 0.78539
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0.1 0.3
+                    }
+                  }
+                  geometry Plane {
+                    size 0.05 0.05
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF Ramp_R Transform {
+          translation -0.19 0 -0.2
+          children [
+            Transform {
+              rotation 1 0 0 -0.261799
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0.1 0.3
+                    }
+                  }
+                  geometry Plane {
+                    size 0.0985747062188375 0.3028649562213102
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF Base Transform {
+          translation -0.095 0.0149 0.145
+          children [
+            Shape {
+              appearance FlexibleAluminiumDuct {
+              }
+              geometry Box {
+                size 0.3 0.05 0.4
+              }
+            }
+          ]
+        }
+        DEF Ramp_L Transform {
+          translation 0 0 -0.2
+          children [
+            Transform {
+              rotation 1 0 0 -0.261799
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0.1 0.3
+                    }
+                  }
+                  geometry Plane {
+                    size 0.0985747062188375 0.3028649562213102
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF Ramp_M Transform {
+          translation 0 0 -0.2
+          children [
+            Transform {
+              translation -0.095 0 0
+              rotation 1 0 0 -0.261799
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 1 1 1
+                    }
+                  }
+                  geometry Plane {
+                    size 0.0985747062188375 0.3028649562213102
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  recognitionColors [
+    0 0 1
+  ]
+}

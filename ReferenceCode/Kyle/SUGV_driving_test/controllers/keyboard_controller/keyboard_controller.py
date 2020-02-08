@@ -1,7 +1,7 @@
 """basic keyboard controller for SUGV"""
 from controller import Robot, Motor, Keyboard
 
-MAX_SPEED = -10
+MAX_SPEED = -20
 # TIME_STEP = 64
 INCREMENT = 0.1
 

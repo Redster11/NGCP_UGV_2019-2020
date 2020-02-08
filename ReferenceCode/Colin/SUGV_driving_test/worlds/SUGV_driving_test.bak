@@ -1,0 +1,274 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  gpsCoordinateSystem "WGS84"
+}
+Viewpoint {
+  orientation 0.05242987834721839 0.9847485552045294 0.16589572290775847 3.708520615458634
+  position -0.9505687745902518 0.7735606466811396 -1.4321430184632267
+  follow "SUGV:body"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 20 20
+}
+DEF SUGV Robot {
+  translation 0 0.16 0
+  children [
+    TouchSensor {
+      translation 0 0 0.16
+      scale 0.458998 0.458998 0.458998
+      children [
+        DEF Bumper Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0
+            }
+          }
+          geometry Box {
+            size 0.1 0.1 0.05
+          }
+        }
+      ]
+      boundingObject USE Bumper
+      physics Physics {
+      }
+      translationStep 0.001
+    }
+    Compass {
+      yAxis FALSE
+    }
+    GPS {
+    }
+    DEF Wheel_LB HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.0499998 -0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_LB"
+        }
+      ]
+      endPoint Solid {
+        translation 0.13 -0.0499998 -0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 1
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LB"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RM HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.05 0
+      }
+      endPoint Solid {
+        translation 0.13 -0.05 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RM"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_LF HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.13 -0.0500003 0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_LF"
+        }
+      ]
+      endPoint Solid {
+        translation 0.13 -0.0500003 0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LF"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RB HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 -0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_RB"
+        }
+      ]
+      endPoint Solid {
+        translation -0.13 -0.0500008 -0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 1
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RB"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_LM HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 0
+      }
+      endPoint Solid {
+        translation -0.13 -0.0500008 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LM"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Wheel_RF HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.13 -0.0500008 0.11
+      }
+      device [
+        RotationalMotor {
+          name "Motor_RF"
+        }
+      ]
+      endPoint Solid {
+        translation -0.13 -0.0500008 0.11
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RF"
+        boundingObject Cylinder {
+          height 0.0254
+          radius 0.0381
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Body Solid {
+      translation 0 0.0178 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0 0
+            }
+          }
+          geometry Box {
+            size 0.2286 0.16 0.3048
+          }
+        }
+      ]
+      name "body"
+      boundingObject Box {
+        size 0.2286 0.16 0.3048
+      }
+      physics Physics {
+      }
+    }
+  ]
+  name "SUGV"
+  boundingObject Transform {
+    translation 0 0.0178 0
+    children [
+      Box {
+        size 0.2286 0.16 0.3048
+      }
+    ]
+  }
+  physics Physics {
+  }
+  controller "<extern>"
+}
