@@ -8,7 +8,9 @@ from controller import Robot, Motor, DistanceSensor, Camera, Keyboard, GPS, Comp
 import math
 
 #global variables
-global lbMotor, lfMotor, rbMotor, rfMotor, robot, autoPilot, previousKey, headingAdjusted
+global lbMotor, lfMotor, rbMotor, rfMotor, robot, autoPilot, previousKey, headingAdjusted, state
+
+state = 1
 
 #Robot and variable declarations
 robot = Robot()
@@ -23,6 +25,7 @@ compass.enable(250)
 camera = robot.getCamera('camera')
 camera.enable(100)
 camera.recognitionEnable(100)
+
 
 headingAdjusted = False
 previousKey = 61
@@ -161,7 +164,7 @@ def haversine(coord1, coord2):
    
 def auto_pilot(maxSpeed, gpsDestination):
 
-    global headingAdjusted
+    global headingAdjusted, state
     
     heading = 0
     gpsLocation = ()
@@ -195,7 +198,27 @@ def auto_pilot(maxSpeed, gpsDestination):
         move_forward(maxSpeed)
         
     if targetDistance<0.2:
-        auto_pilot = False
+        state = 2
+        
+def locateAndCenter(maxSpeed):
+    objectFound = False
+    
+    objects = camera.getRecognitionNumberOfObjects()
+    recognized = camera.getRecognitionObjects()
+    if(objects > 0):
+        objectFound = True
+    
+    if(objectFound == False):
+        turn_left(maxSpeed/5)
+
+    if(objectFound):
+        objectPosition = recognized[0].get_position_on_image()
+        if(objectPosition[0] > 32):
+            turn_right(maxSpeed/5)
+        elif(objectPosition[0]<29):
+            turn_left(maxSpeed/5)
+        else:
+            state = 3
    
 
 #MAIN
@@ -222,31 +245,25 @@ while robot.step(timestep) != -1:
     currentHeading = abs((currentHeading-360)%360)
     
     gpsDestination = (1.5920715449556217e-05, -1.537514772360986e-05)
+    
+    if(state == 1):
+        auto_pilot(maxSpeed, gpsDestination)
+        
+    if(state == 2):
+
+        locateAndCenter(maxSpeed)
+        
+    if(state == 3):
+        stop_moving()
         
     #if(key > -1):
        # read_keyboard_input(key,maxSpeed)
     #if(autoPilot == True):
         #auto_pilot(maxSpeed, gpsDestination)
     
-    objectFound = False
+    #locateAndCenter(maxSpeed)
     
-    objects = camera.getRecognitionNumberOfObjects()
-    recognized = camera.getRecognitionObjects()
-    if(objects > 0):
-        objectFound = True
-    
-    if(objectFound == False):
-        turn_left(maxSpeed/5)
-
-    if(objectFound):
-        objectPosition = recognized[0].get_position_on_image()
-        if(objectPosition[0] > 32):
-            turn_right(maxSpeed/5)
-        elif(objectPosition[0]<29):
-            turn_left(maxSpeed/5)
-        else:
-            break
-    print("Object found and centered")
+            
     #uncomment the following line to see location and heading information    
     #print(currentLocation, currentHeading)
        
