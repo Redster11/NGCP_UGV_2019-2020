@@ -1,9 +1,9 @@
-"""keyboard controller with Autonomy for SUGV"""
-from controller import Robot, Motor, Keyboard, GPS, Compass
+"""Main Controller for SUGV"""
+from controller import Robot, Motor, Keyboard, GPS, Compass, Camera, CameraRecognitionObject, TouchSensor
 import math, random
 
 # Constants
-MAX_SPEED = 10
+MAX_SPEED = 60
 # TIME_STEP = 64
 INCREMENT = 0.1
 TURN_COEFFICIENT = 2.0
@@ -13,12 +13,14 @@ LEFT = 0
 RIGHT = 1
 
 # Globals
+state = 1
 current_target_index = 0
-# targets = [[0.00001, 0.00004], [0.00000, 0.00000], [-0.00000, -0.00004], [-0.0000, -0.00001]]
-targets = [[0,0]]
+targets = [[33.9322583, -117.6311557], [33.9323678, -117.6310562]]
 autopilot = False
 old_autopilot = False
 old_key = -1
+PIXEL_THRESHOLD = 10
+counter = 0
 
 # create Robot
 robot = Robot()
@@ -28,11 +30,21 @@ kb = robot.getKeyboard()
 kb.enable(250)
 
 # instantiate devices on Robot
+# instantiate devices on Robot
 motors = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
+
 gps = GPS('gps')
 gps.enable(250)
+
 compass = Compass('compass')
 compass.enable(250)
+
+bumper = TouchSensor('touch sensor')
+bumper.enable(250)
+
+camera = Camera('camera')
+camera.enable(250)
+camera.recognitionEnable(100)
 
 # get timestep
 TIME_STEP = int(robot.getBasicTimeStep())
@@ -83,7 +95,7 @@ def check_keyboard():
         if(key == ord('P')):
             if (key != old_key):  # perform this action just once
                 pos3D = gps.getValues()
-                print("position: {0:.3f}, {1:.3f}" .format(pos3D[0], pos3D[1]))
+                print("position: {0:.7f}, {1:.7f}" .format(pos3D[0], pos3D[1]))
         if(key == ord('A')):
             if (key != old_key):  # perform this action just once
                 autopilot = not autopilot
@@ -132,10 +144,11 @@ def angle(v1, v2):
     return theta
 
 # autopilot to pass trough the predefined target positions
-def run_autopilot():
+def autonomous_nav():
     # global variable pull
     global current_target_index
     global targets
+    global state
 
     # prepare the speed array
     speeds = [0.0, 0.0]
@@ -151,14 +164,14 @@ def run_autopilot():
     front = [north[0], -1*north[1]]
 
     # generate random waypoint
-    targets.append([0.00000063*random.randrange(-100,100,1),0.00000063*random.randrange(-100,100,1)])
+    targets.append([random.uniform(33.9314620, 33.9325890), random.uniform(-117.6312430, -117.6330461)])
 
     # compute the direction and the distance to the target
     direction = minus(targets[current_target_index], pos)
     distance = norm(direction)
     direction = normalize(direction)
     # print("Distance: {0:.7f}    Direction: {1:.7f}, {2:.7f}".format(distance, direction[0], direction[1]), end="\r")
-    print("Current Pos: {0:.7f},{1:.7f}     Target Pos: {2:.7f},{3:.7f}" .format(pos[0], pos[1], targets[current_target_index][0],targets[current_target_index][1]), end="\r")
+    # print("Current Pos: {0:.7f},{1:.7f}     Target Pos: {2:.7f},{3:.7f}" .format(pos[0], pos[1], targets[current_target_index][0],targets[current_target_index][1]), end="\r")
 
     # compute the target angle
     beta = angle(front, direction) - M_PI/2
@@ -168,6 +181,10 @@ def run_autopilot():
     if (distance < DISTANCE_TOLERANCE):
         print("\ntarget {0} reached" .format(current_target_index + 1))
         current_target_index += 1
+        
+        # Transition to next state
+        if(current_target_index == 2):
+            state = 2
     
     # move the robot to the next target
     else:
@@ -177,8 +194,121 @@ def run_autopilot():
     # set the motor speeds
     robot_set_speed(speeds[LEFT], speeds[RIGHT])
 
+# Center object on frame
+def centerOnFrame():
+    # Globals
+    global PIXEL_THRESHOLD
+    global state
+    global MAX_SPEED
+
+    objectFound = camera.getRecognitionNumberOfObjects()
+    left = 0
+    right = 0
+
+    if(objectFound > 0):    # Object found on frame, center
+        recognized = camera.getRecognitionObjects()
+        [PosX, PosY] = recognized[0].get_position_on_image()
+        [SizeX, SizeY] = recognized[0].get_size_on_image()
+
+        # print("Pos on Image: {0:.0f},{1:.0f}     Size on Image: {2:.0f},{3:.0f}" .format(PosX, PosY, SizeX, SizeY), end="\r")
+
+        center_current = PosX
+        center_goal = camera.getWidth() / 2
+        center_diff = center_current - center_goal
+        normalized_center_diff = abs(center_diff / camera.getWidth())
+
+        # print("Current Center: {0:.0f}     True Center: {1:.0f}     Center Diff: {2:.0f}" .format(center_current, center_goal, center_diff), end="\r")
+        
+        if(center_diff > PIXEL_THRESHOLD):    # Need to rotate Right
+            left = MAX_SPEED * normalized_center_diff
+            right = -1 * MAX_SPEED * normalized_center_diff
+        elif(center_diff < -1 * PIXEL_THRESHOLD):  # Need to rotate Left
+            left = -1 * MAX_SPEED * normalized_center_diff
+            right = MAX_SPEED * normalized_center_diff
+        else:
+            state = 3
+
+    else:   # Object not found, look until it is found
+        left = -1 * MAX_SPEED/4
+        right = MAX_SPEED/4
+
+    robot_set_speed(left, right)
+
+# Drive forward until touch
+def touchStop():
+    # Globals
+    global MAX_SPEED
+    global state
+
+    # Variables
+    left = MAX_SPEED/4
+    right = MAX_SPEED/4
+
+    if (bumper.getValue() == 1.0):
+        left = 0
+        right = 0
+        state = 4
+    
+    robot_set_speed(left, right)
+
+# Generate delay amount for x seconds
+def waitCount(seconds):
+    # Globals
+    global TIME_STEP
+
+    return round(seconds * (1000/TIME_STEP))
+
+# Wait in Transport for x seconds
+def waitInTransport(seconds):
+    # Globals
+    global state
+    global counter
+
+    # Variables
+    limit = waitCount(seconds)
+
+    counter += 1
+
+    if(counter == limit):
+        counter = 0
+        state = 5
+
+# Unload from BUGV
+def unload():
+    # Globals
+    global state
+    global counter
+
+    limit = waitCount(10)
+    left = -1 * MAX_SPEED/4
+    right = -1 * MAX_SPEED/4
+
+    counter += 1
+
+    if(counter == limit):
+        counter = 0
+        state = 6
+        left = 0
+        right = 0
+    
+    robot_set_speed(left,right)
+
 # main loop
 while (robot.step(TIME_STEP) != -1):
     check_keyboard()
     if (autopilot):
-        run_autopilot()
+        if(state == 1):
+            autonomous_nav()
+        elif(state == 2):
+            # recognitionToggle()
+            centerOnFrame()
+        elif(state == 3):
+            touchStop()
+        elif(state == 4):
+            waitInTransport(10)
+        elif(state == 5):
+            unload()
+        else:
+            continue
+
+    print("State: {0:d}" .format(state), end="\r")
