@@ -30,7 +30,6 @@ kb = robot.getKeyboard()
 kb.enable(250)
 
 # instantiate devices on Robot
-# instantiate devices on Robot
 motors = [Motor("Motor_LB"), Motor("Motor_LF"), Motor("Motor_RB"), Motor("Motor_RF")]
 
 gps = GPS('gps')
@@ -52,12 +51,6 @@ TIME_STEP = int(robot.getBasicTimeStep())
 # set target position to infinity (speed control)
 for i in range(0,4):
     motors[i].setPosition(float('inf'))
-
- # print user instructions
-print("You can drive this robot:")
-print("Select the 3D window and use arrow keys:")
-print("Press 'A' to return to the autopilot mode")
-print("Press 'P' to get the robot position")
 
 # set left and right motor speed [rad/s]
 def robot_set_speed(left, right):
@@ -292,6 +285,12 @@ def unload():
         right = 0
     
     robot_set_speed(left,right)
+
+# print user instructions
+print("You can drive this robot:")
+print("Select the 3D window and use arrow keys:")
+print("Press 'A' to return to the autopilot mode")
+print("Press 'P' to get the robot position")
 
 # main loop
 while (robot.step(TIME_STEP) != -1):

@@ -11,9 +11,9 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.43636891634463876 -0.8630420137883028 -0.2544418426368516 5.094822710147891
-  position 5.314201865285237 4.617290462545699 1.2698925230592877
+  position 12.564596730974902 9.99724088128154 5.373202049795979
   near 3
-  follow "SUGV"
+  follow "SUGV:body"
   followType "Mounted Shot"
 }
 TexturedBackground {
@@ -39,8 +39,29 @@ Floor {
     }
   }
 }
+Ramp30deg {
+}
+Solid {
+  translation 0 1.23 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        emissiveColor 1 0 1
+      }
+      geometry Box {
+        size 0.1 0.5 2
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.5 2
+  }
+  recognitionColors [
+    1 0 1
+  ]
+}
 DEF SUGV Robot {
-  translation -0.47 0.16 -1.74
+  translation 0 0.16 -2.29
   children [
     Camera {
       translation 0 0.0499992 0.16
@@ -131,6 +152,24 @@ DEF SUGV Robot {
       jointParameters HingeJointParameters {
         anchor 0.13 -0.05 0
       }
+      endPoint Solid {
+        translation 0.13 -0.05 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_RM"
+      }
     }
     DEF Wheel_LF HingeJoint {
       jointParameters HingeJointParameters {
@@ -206,6 +245,24 @@ DEF SUGV Robot {
       jointParameters HingeJointParameters {
         anchor -0.13 -0.0500008 0
       }
+      endPoint Solid {
+        translation -0.13 -0.0500008 0
+        rotation 0 0 1 1.5708
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0 1 0
+              }
+            }
+            geometry Cylinder {
+              height 0.0254
+              radius 0.0381
+            }
+          }
+        ]
+        name "Wheel_LM"
+      }
     }
     DEF Wheel_RF HingeJoint {
       jointParameters HingeJointParameters {
@@ -276,25 +333,4 @@ DEF SUGV Robot {
   physics Physics {
   }
   controller "<extern>"
-}
-Ramp30deg {
-}
-Solid {
-  translation 0 1.23 0
-  children [
-    Shape {
-      appearance PBRAppearance {
-        emissiveColor 1 0 1
-      }
-      geometry Box {
-        size 0.1 0.5 2
-      }
-    }
-  ]
-  boundingObject Box {
-    size 0.1 0.5 2
-  }
-  recognitionColors [
-    1 0 1
-  ]
 }
