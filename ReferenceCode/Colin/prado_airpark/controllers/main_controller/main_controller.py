@@ -151,13 +151,13 @@ def autonomous_nav():
     north3D = compass.getValues()
     # print(pos3D)
 
-    # compute the 2D position of the robo and its orientation
+    # compute the 2D position of the robot and its orientation
     pos = [pos3D[0], pos3D[1]]
     north = [north3D[0], north3D[2]]
     front = [north[0], -1*north[1]]
 
     # generate random waypoint
-    targets.append([random.uniform(33.9314620, 33.9325890), random.uniform(-117.6312430, -117.6330461)])
+    # targets.append([random.uniform(33.9314620, 33.9325890), random.uniform(-117.6312430, -117.6330461)])
 
     # compute the direction and the distance to the target
     direction = minus(targets[current_target_index], pos)
@@ -178,6 +178,7 @@ def autonomous_nav():
         # Transition to next state
         if(current_target_index == 2):
             state = 2
+            current_target_index = 0
     
     # move the robot to the next target
     else:
@@ -272,7 +273,7 @@ def unload():
     global state
     global counter
 
-    limit = waitCount(10)
+    limit = waitCount(20)
     left = -1 * MAX_SPEED/4
     right = -1 * MAX_SPEED/4
 
@@ -307,7 +308,7 @@ while (robot.step(TIME_STEP) != -1):
             waitInTransport(10)
         elif(state == 5):
             unload()
-        else:
-            continue
+        elif(state == 6):
+            autonomous_nav()
 
     print("State: {0:d}" .format(state), end="\r")
