@@ -6,7 +6,7 @@ import math, random
 MAX_SPEED = 60
 # TIME_STEP = 64
 INCREMENT = 0.1
-TURN_COEFFICIENT = 2.0
+TURN_COEFFICIENT = 4.0
 DISTANCE_TOLERANCE = 0.00001
 M_PI = math.pi
 LEFT = 0
@@ -15,7 +15,8 @@ RIGHT = 1
 # Globals
 state = 1
 current_target_index = 0
-targets = [[33.9322583, -117.6311557], [33.9323678, -117.6310562]]
+targets = [[33.9322583, -117.6311557], [33.9323662, -117.6308731]]
+# targets = [[33.9322583, -117.6311557], [33.9323678, -117.6310562]]
 autopilot = False
 old_autopilot = False
 old_key = -1
