@@ -202,6 +202,7 @@ def auto_pilot(maxSpeed, gpsDestination):
         
     if targetDistance<0.2:
         state = 2
+        print("State 2: Find target and center in screen")
         
 def locateAndCenter(maxSpeed):
     global state
@@ -218,13 +219,13 @@ def locateAndCenter(maxSpeed):
 
     if(objectFound):
         objectPosition = recognized[0].get_position_on_image()
-        print(objectPosition[0])
-        if(objectPosition[0] > 32):
+        if(objectPosition[0] > 65):
             turn_right(maxSpeed/5)
-        if(objectPosition[0]<29):
+        if(objectPosition[0]<58):
             turn_left(maxSpeed/5)
-        if(objectPosition[0] <= 32 and objectPosition[0] >=29):
+        if(objectPosition[0] <= 65 and objectPosition[0] >=58):
             state = 3
+            print("State 3: Load onto BUGV")
    
 
 #MAIN
@@ -235,6 +236,7 @@ input = robot.getKeyboard()
 input.enable(100)    
 initilize_motors()
 count = 0
+print("State 1: GPS Waypoint Navigation")
 
 
 
@@ -268,18 +270,19 @@ while robot.step(timestep) != -1:
         else:
             state = 4
             stop_moving()
+            print("State 4: Stop and wait for transport")
     if(state == 4):
          count += 1
-         print(count)
          if(count == (int)(1000/64)*10):
              state = 5
              count = 0
+             print("State 5: Unload from BUGV")
     if(state == 5):
-         print(count)
          move_backward(maxSpeed)
          count += 1
          if(count == (int)(1000/64)*5):
              state = 6
+             print("State 6: Give manual control to GCS")
     if(state == 6):
         if(key > -1):
             read_keyboard_input(key,maxSpeed)

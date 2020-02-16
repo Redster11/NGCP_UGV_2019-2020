@@ -3,8 +3,10 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.09693151831734902 0.9897109817129467 0.10524473114359961 4.563451450741979
-  position -6.3261005530769205 1.9927966251672853 -2.986397497487052
+  orientation 0.16698318079955704 0.9740810033515788 0.15258707756439957 4.737135639558037
+  position -4.310938627741035 1.188081574609938 3.6149368359421152
+  follow "SUGV(1):body"
+  followType "Mounted Shot"
 }
 DEF SUGV Robot {
   translation -0.671249 0.16 3.66394
@@ -32,6 +34,8 @@ DEF SUGV Robot {
     }
     Camera {
       translation 0 0.07 0
+      width 128
+      height 128
       recognition Recognition {
       }
     }
@@ -227,13 +231,15 @@ DEF SUGV Robot {
 }
 RectangleArena {
   floorSize 10 10
+  floorAppearance Grass {
+  }
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 Solid {
-  translation -0.391399 0.27 -2.04791
+  translation -0.43428 0.25 -2.02093
   scale 2 2 2
   children [
     Shape {
@@ -243,22 +249,18 @@ Solid {
         }
       }
       geometry Box {
-        size 0.1 0.1 0.1
+        size 0.2 0.1 0.3
       }
     }
   ]
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.2 0.1 0.3
   }
   physics Physics {
   }
   recognitionColors [
     0.9 0 0
   ]
-}
-WoodenBox {
-  translation 0.281511 0.3 -0.518987
-  rotation 1 0 0 4.692820414042842e-06
 }
 DEF BUGV Robot {
   translation 0.0466059 0.04 -1.90661
