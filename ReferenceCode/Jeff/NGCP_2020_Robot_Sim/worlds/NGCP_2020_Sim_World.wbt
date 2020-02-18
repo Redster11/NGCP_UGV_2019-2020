@@ -3,8 +3,10 @@ WorldInfo {
   gpsCoordinateSystem "WGS84"
 }
 Viewpoint {
-  orientation 0.17339231031955157 0.9705656734508656 0.1671447882553202 4.68341079917136
-  position -8.44342744187577 3.851256621737856 0.44583816620965816
+  orientation 0.16698318079955704 0.9740810033515788 0.15258707756439957 4.737135639558037
+  position -4.310938627741035 1.188081574609938 3.6149368359421152
+  follow "SUGV(1):body"
+  followType "Mounted Shot"
 }
 DEF SUGV Robot {
   translation -0.671249 0.16 3.66394
@@ -32,6 +34,8 @@ DEF SUGV Robot {
     }
     Camera {
       translation 0 0.07 0
+      width 128
+      height 128
       recognition Recognition {
       }
     }
@@ -78,30 +82,6 @@ DEF SUGV Robot {
     DEF Wheel_RM HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.13 -0.05 0
-      }
-      endPoint Solid {
-        translation 0.13 -0.05 0
-        rotation 2.9439179532298196e-17 0 1 1.5707999999999989
-        children [
-          Shape {
-            appearance Appearance {
-              material Material {
-                diffuseColor 0 1 0
-              }
-            }
-            geometry Cylinder {
-              height 0.0254
-              radius 0.0381
-            }
-          }
-        ]
-        name "Wheel_RM"
-        boundingObject Cylinder {
-          height 0.0254
-          radius 0.0381
-        }
-        physics Physics {
-        }
       }
     }
     DEF Wheel_RB HingeJoint {
@@ -176,30 +156,6 @@ DEF SUGV Robot {
       jointParameters HingeJointParameters {
         anchor -0.13 -0.0500008 0
       }
-      endPoint Solid {
-        translation -0.13 -0.0500008 0
-        rotation -1.9626119688198802e-17 0 1 1.570799999999999
-        children [
-          Shape {
-            appearance Appearance {
-              material Material {
-                diffuseColor 0 1 0
-              }
-            }
-            geometry Cylinder {
-              height 0.0254
-              radius 0.0381
-            }
-          }
-        ]
-        name "Wheel_LM"
-        boundingObject Cylinder {
-          height 0.0254
-          radius 0.0381
-        }
-        physics Physics {
-        }
-      }
     }
     DEF Wheel_LB HingeJoint {
       jointParameters HingeJointParameters {
@@ -273,15 +229,17 @@ DEF SUGV Robot {
   ]
   controller "NGCP_2020_Robot_Controll_Camera_Rec"
 }
+RectangleArena {
+  floorSize 10 10
+  floorAppearance Grass {
+  }
+}
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-RectangleArena {
-  floorSize 10 10
-}
 Solid {
-  translation 0.323388 0.1 -1.24437
+  translation -0.43428 0.25 -2.02093
   scale 2 2 2
   children [
     Shape {
@@ -291,12 +249,12 @@ Solid {
         }
       }
       geometry Box {
-        size 0.1 0.1 0.1
+        size 0.2 0.1 0.3
       }
     }
   ]
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.2 0.1 0.3
   }
   physics Physics {
   }
@@ -304,7 +262,125 @@ Solid {
     0.9 0 0
   ]
 }
-WoodenBox {
-  translation 0.281511 0.3 -0.518987
-  rotation 1 0 0 4.692820414042842e-06
+DEF BUGV Robot {
+  translation 0.0466059 0.04 -1.90661
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    DEF BUGV Transform {
+      translation 0.07 0.04 0
+      scale 2 2 2
+      children [
+        Solid {
+          children [
+            DEF diamond Transform {
+              translation -0.095 0 -0.220575
+              rotation 1 0 0 -0.261799
+              children [
+                Transform {
+                  translation 0 -0.005 0
+                  rotation 0 1 0 0.78539
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.05 0.05
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Ramp_R Transform {
+              translation -0.19 0 -0.2
+              children [
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Base Transform {
+              translation -0.095 0.0149 0.145
+              children [
+                Shape {
+                  appearance FlexibleAluminiumDuct {
+                  }
+                  geometry Box {
+                    size 0.3 0.05 0.4
+                  }
+                }
+              ]
+            }
+            DEF Ramp_L Transform {
+              translation 0 0 -0.2
+              children [
+                Transform {
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0.1 0.3
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+            DEF Ramp_M Transform {
+              translation 0 0 -0.2
+              children [
+                Transform {
+                  translation -0.095 0 0
+                  rotation 1 0 0 -0.261799
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 1 1 1
+                        }
+                      }
+                      geometry Plane {
+                        size 0.0985747062188375 0.3028649562213102
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          boundingObject USE Base
+        }
+      ]
+    }
+  ]
+  boundingObject Transform {
+    translation -0.115 0.0379 -0.393984
+    rotation 1 0 0 -0.261799
+    scale 2 2 2
+    children [
+      Box {
+        size 0.3 0.005 0.3
+      }
+    ]
+  }
 }
