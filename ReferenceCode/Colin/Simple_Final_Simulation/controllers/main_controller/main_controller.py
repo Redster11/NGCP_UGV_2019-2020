@@ -16,7 +16,7 @@ RIGHT = 1
 state = 1
 current_target_index = 0
 # targets = [[0.0000182, -0.0000180]]
-targets = [[0.0000559, -0.0000586], [-0.0000497, -0.0000716], [-0.0000143, 0.0000433], [0.0000380, -0.0000175]]
+targets = [[0.0000559, -0.0000586], [-0.0000497, -0.0000716], [-0.0000143, 0.0000433], [0.0000300, -0.0000180]]
 autopilot = False
 old_autopilot = False
 old_key = -1
@@ -275,8 +275,8 @@ def unload():
     global counter
 
     limit = waitCount(10)
-    left = -1 * MAX_SPEED/4
-    right = -1 * MAX_SPEED/4
+    left = -1 * MAX_SPEED/6
+    right = -1 * MAX_SPEED/6
 
     counter += 1
 
